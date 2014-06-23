@@ -2,6 +2,6 @@ package com.bertazoli.charity.auth
 
 import grails.plugin.springsecurity.annotation.Secured;
 
-@Secured(['ROLE_ANONYMOUS'])
+@Secured('IS_AUTHENTICATED_ANONYMOUSLY')
 class RegisterController extends grails.plugin.springsecurity.ui.RegisterController {
 }

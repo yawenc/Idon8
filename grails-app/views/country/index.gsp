@@ -28,6 +28,8 @@
 					
 						<g:sortableColumn property="code" title="${message(code: 'country.code.label', default: 'Code')}" />
 					
+						<g:sortableColumn property="active" title="${message(code: 'country.active.label', default: 'Active')}" />
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -37,6 +39,8 @@
 						<td><g:link action="show" id="${countryInstance.id}">${fieldValue(bean: countryInstance, field: "name")}</g:link></td>
 					
 						<td>${fieldValue(bean: countryInstance, field: "code")}</td>
+					
+						<td><g:formatBoolean boolean="${countryInstance.active}" /></td>
 					
 					</tr>
 				</g:each>

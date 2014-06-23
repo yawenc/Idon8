@@ -17,4 +17,12 @@ enum CharitySanction {
 	String toString() {
 		displayName
 	}
+	
+	public static CharitySanction getByDescription(String description) {
+		for (CharitySanction status : values()) {
+			if (status.displayName == description) {
+				return status;
+			}
+		}
+	}
 }

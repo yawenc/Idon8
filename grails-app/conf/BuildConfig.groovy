@@ -61,6 +61,7 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.2'
 		compile ":spring-security-core:2.0-RC3"
 		compile ":spring-security-ui:1.0-RC2"
+		compile ":csv:0.3.1"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.13" // or ":hibernate4:4.3.5.1"

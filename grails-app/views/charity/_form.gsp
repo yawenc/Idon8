@@ -2,7 +2,6 @@
 <%@ page import="com.bertazoli.charity.enums.CharityStatus" %>
 <%@ page import="com.bertazoli.charity.enums.CharitySanction" %>
 <%@ page import="com.bertazoli.charity.enums.CharityDesignationCode" %>
-<%@ page import="com.bertazoli.charity.enums.CharityCategory" %>
 
 
 <div class="fieldcontain ${hasErrors(bean: charityInstance, field: 'address', 'error')} ">
@@ -50,14 +49,6 @@
 		<g:message code="charity.designationCode.label" default="Designation Code" />
 	</label>
 	<g:select name="designationCode" from="${CharityDesignationCode.values() }" value="${charityInstance?.designationCode}" optionKey="key" noSelection="${['':''] }"/>
-</div>
-
-<div class="fieldcontain required">
-	<label for="category">
-		<g:message code="charity.category.label" default="Category" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select name="category" from="${CharityCategory.values() }" value="${charityInstance?.category}" optionKey="key"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: charityInstance, field: 'name', 'error')} required">

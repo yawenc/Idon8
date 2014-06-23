@@ -41,6 +41,26 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${countryInstance?.active}">
+				<li class="fieldcontain">
+					<span id="active-label" class="property-label"><g:message code="country.active.label" default="Active" /></span>
+					
+						<span class="property-value" aria-labelledby="active-label"><g:formatBoolean boolean="${countryInstance?.active}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${countryInstance?.states}">
+				<li class="fieldcontain">
+					<span id="states-label" class="property-label"><g:message code="country.states.label" default="States" /></span>
+					
+						<g:each in="${countryInstance.states}" var="s">
+						<span class="property-value" aria-labelledby="states-label"><g:link controller="state" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:countryInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

@@ -15,6 +15,13 @@ class Donation {
 	Boolean completed
 	String paypalToken
 	
+	static constraints = {
+		percentageToKeep blank: false, range: 0..30
+		grossAmountValue blank: false, validator: {
+			return (it % 5) == 0
+		}
+	}
+	
 	static belongsTo = [user:User]
 	static hasMany = [tickets:Ticket]
 }

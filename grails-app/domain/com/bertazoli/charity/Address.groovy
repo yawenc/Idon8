@@ -9,4 +9,9 @@ class Address {
 	String postalCode
 	
 	static belongsTo = [charity:Charity]
+	
+	@Override
+	public String toString() {
+		street + " " + city + " " + postalCode
+	}
 }

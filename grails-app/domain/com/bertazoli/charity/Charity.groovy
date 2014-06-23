@@ -1,6 +1,5 @@
 package com.bertazoli.charity
 
-import com.bertazoli.charity.enums.CharityCategory
 import com.bertazoli.charity.enums.CharityDesignationCode
 import com.bertazoli.charity.enums.CharitySanction
 import com.bertazoli.charity.enums.CharityStatus
@@ -13,7 +12,8 @@ class Charity {
 	CharitySanction sanction
 	CharityDesignationCode designationCode
 	Date effectiveDateOfStatus
-	CharityCategory category
+	Integer category
+	Boolean active = Boolean.FALSE
 	
 	static hasMany = [address:Address]
 	
@@ -21,6 +21,11 @@ class Charity {
 		status blank: true, nullable: true
 		sanction blank: true, nullable: true
 		designationCode blank: true, nullable: true
-		category blank: false 
+		category blank: true, nullable: true 
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 }

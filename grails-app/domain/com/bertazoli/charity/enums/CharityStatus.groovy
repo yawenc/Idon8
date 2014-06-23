@@ -20,4 +20,12 @@ enum CharityStatus {
 	String toString() {
 		displayName
 	}
+	
+	public static CharityStatus getByDescription(String description) {
+		for (CharityStatus status : values()) {
+			if (status.displayName == description) {
+				return status;
+			}
+		}
+	}
 }
