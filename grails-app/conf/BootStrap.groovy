@@ -16,12 +16,13 @@ class BootStrap {
 	def dataSource
 	
 	def init = { servletContext ->
+		/*
 		def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
 		def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
 
-		def userDetails = new UserDetails(firstName: 'Vitor', lastName: 'Bertazoli', dateOfBirth: new Date().parse("yyyy-MM-dd", "1982-03-10")).save(flush: true)
-		def testUser = new User(username: 'vitor', password: '1q2w3e4r', email: 'vitor@bertazoli.com', userDetails: userDetails)
+		def testUser = new User(username: 'vitor', password: '1q2w3e4r', email: 'vitor@bertazoli.com')
 		testUser.save(flush: true)
+		def userDetails = new UserDetails(firstName: 'Vitor', lastName: 'Bertazoli', dateOfBirth: new Date().parse("yyyy-MM-dd", "1982-03-10"), user:testUser).save(flush: true)
 
 		UserRole.create testUser, adminRole, true
 		UserRole.create testUser, userRole, true
@@ -63,6 +64,7 @@ class BootStrap {
 			Address address = new Address(country: country, state: state, street: fields[7], city: fields[8], postalCode: fields[11], charity: charity).save(flush:true);
 			line++
 		}
+		*/
 	}
 	def destroy = {
 	}

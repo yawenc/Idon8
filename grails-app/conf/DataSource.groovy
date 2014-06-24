@@ -16,7 +16,7 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "create" // one of 'create', 'create-drop','update'
+//			dbCreate = "create" // one of 'create', 'create-drop','update'
 			url = "jdbc:mysql://localhost/charity?useUnicode=yes&characterEncoding=UTF-8"
 			username = "vitor"
 			password = "1q2w3e4r"
@@ -27,7 +27,7 @@ environments {
 	}
 	test {
 		dataSource {
-			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+//			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
 			url = "jdbc:mysql://localhost/TESTDBNAME?useUnicode=yes&characterEncoding=UTF-8"
 			username = "test"
 			password = "testpw"
@@ -35,7 +35,7 @@ environments {
 	}
     production {
         dataSource {
-            dbCreate = "update"
+//            dbCreate = "update"
             url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
             properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation

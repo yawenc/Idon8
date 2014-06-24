@@ -1,5 +1,6 @@
 package com.bertazoli.charity.auth
 
+import com.bertazoli.charity.user.UserDetails
 import grails.plugin.springsecurity.annotation.Secured;
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
 import grails.plugin.springsecurity.SpringSecurityUtils
@@ -24,6 +25,10 @@ class UserController extends grails.plugin.springsecurity.ui.UserController {
 			user."$passwordFieldName" = springSecurityUiService.encodePassword(params.password, salt)
 		}
 
+		if (!user.userDetails) {
+			user.userDetails = new UserDetails()
+		}
+		
 		if (params.firstname) {
 			user.userDetails.firstName = params.firstname;
 		}
@@ -31,8 +36,12 @@ class UserController extends grails.plugin.springsecurity.ui.UserController {
 		if (params.lastname) {
 			user.userDetails.lastName = params.lastname;
 		}
+		
+		if (params.dateofbirth) {
+			user.userDetails.dateOfBirth = params.dateofbirth
+		}
 
-		if (!user.save(flush: true)) {
+		if (!user.save(flush: true) && !user.userDetails.save(flush: true)) {
 			render view: 'edit', model: buildUserModel(user)
 			return
 		}

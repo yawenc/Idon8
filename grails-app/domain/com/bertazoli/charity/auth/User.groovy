@@ -14,8 +14,8 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-	UserDetails userDetails
 
+	static hasOne = [userDetails:UserDetails]
 	static hasMany = [donations:Donation]
 	static transients = ['springSecurityService']
 
@@ -23,6 +23,7 @@ class User {
 		username blank: false, unique: true
 		password blank: false
 		email blank: false, nullable: false, email: true
+		userDetails blank: true, nullable: true
 	}
 
 	static mapping = {

@@ -48,10 +48,9 @@ if (isOpenId) {
             <s2ui:textFieldRow name='lastname' labelCode='user.lastname.label' bean="${user.userDetails}"
                             labelCodeDefault='Last Name' value="${user?.userDetails?.lastName}"/>
                  
-            <!--            
-            <s2ui:dateFieldRow name='dateofbirth' labelCode='user.dateofbirth.label' bean="${user.userDetails}"
-                            labelCodeDefault='Date of birth' value="${user?.userDetails?.dateOfBirth}"/>
- 		    -->
+            <g:datePicker name="dateofbirth" precision="day" labelCode='user.dateofbirth.label' bean="${user.userDetails}"
+            				labelCodeDefault='Date of birth' value="${user?.userDetails?.dateOfBirth}" />
+
 			<s2ui:passwordFieldRow name='password' labelCode='user.password.label' bean="${user}"
                                 labelCodeDefault='Password' value="${user?.password}"/>
 

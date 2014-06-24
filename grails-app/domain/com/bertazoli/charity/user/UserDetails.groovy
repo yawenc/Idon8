@@ -6,4 +6,6 @@ class UserDetails {
 	String firstName
 	String lastName
 	Date dateOfBirth
+	
+	static belongsTo = [user:User]
 }
