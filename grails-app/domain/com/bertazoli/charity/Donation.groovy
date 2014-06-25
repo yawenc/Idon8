@@ -18,10 +18,10 @@ class Donation {
 	static constraints = {
 		percentageToKeep blank: false, range: 0..30
 		grossAmountValue blank: false, validator: {
-			return (it % 5) == 0
+			return ((int)it %5) == 0
 		}
 	}
 	
-	static belongsTo = [user:User]
+	static belongsTo = [user:User, draw:Draw, charity:Charity]
 	static hasMany = [tickets:Ticket]
 }

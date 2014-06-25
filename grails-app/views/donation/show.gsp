@@ -23,6 +23,33 @@
 			</g:if>
 			<ol class="property-list donation">
 			
+				<g:if test="${donationInstance?.percentageToKeep}">
+				<li class="fieldcontain">
+					<span id="percentageToKeep-label" class="property-label"><g:message code="donation.percentageToKeep.label" default="Percentage To Keep" /></span>
+					
+						<span class="property-value" aria-labelledby="percentageToKeep-label"><g:fieldValue bean="${donationInstance}" field="percentageToKeep"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${donationInstance?.grossAmountValue}">
+				<li class="fieldcontain">
+					<span id="grossAmountValue-label" class="property-label"><g:message code="donation.grossAmountValue.label" default="Gross Amount Value" /></span>
+					
+						<span class="property-value" aria-labelledby="grossAmountValue-label"><g:fieldValue bean="${donationInstance}" field="grossAmountValue"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${donationInstance?.charity}">
+				<li class="fieldcontain">
+					<span id="charity-label" class="property-label"><g:message code="donation.charity.label" default="Charity" /></span>
+					
+						<span class="property-value" aria-labelledby="charity-label"><g:link controller="charity" action="show" id="${donationInstance?.charity?.id}">${donationInstance?.charity?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${donationInstance?.completed}">
 				<li class="fieldcontain">
 					<span id="completed-label" class="property-label"><g:message code="donation.completed.label" default="Completed" /></span>
@@ -37,6 +64,15 @@
 					<span id="donationDate-label" class="property-label"><g:message code="donation.donationDate.label" default="Donation Date" /></span>
 					
 						<span class="property-value" aria-labelledby="donationDate-label"><g:formatDate date="${donationInstance?.donationDate}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${donationInstance?.draw}">
+				<li class="fieldcontain">
+					<span id="draw-label" class="property-label"><g:message code="donation.draw.label" default="Draw" /></span>
+					
+						<span class="property-value" aria-labelledby="draw-label"><g:link controller="draw" action="show" id="${donationInstance?.draw?.id}">${donationInstance?.draw?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -68,15 +104,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${donationInstance?.grossAmountValue}">
-				<li class="fieldcontain">
-					<span id="grossAmountValue-label" class="property-label"><g:message code="donation.grossAmountValue.label" default="Gross Amount Value" /></span>
-					
-						<span class="property-value" aria-labelledby="grossAmountValue-label"><g:fieldValue bean="${donationInstance}" field="grossAmountValue"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${donationInstance?.paymentStatus}">
 				<li class="fieldcontain">
 					<span id="paymentStatus-label" class="property-label"><g:message code="donation.paymentStatus.label" default="Payment Status" /></span>
@@ -100,15 +127,6 @@
 					<span id="paypalToken-label" class="property-label"><g:message code="donation.paypalToken.label" default="Paypal Token" /></span>
 					
 						<span class="property-value" aria-labelledby="paypalToken-label"><g:fieldValue bean="${donationInstance}" field="paypalToken"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${donationInstance?.percentageToKeep}">
-				<li class="fieldcontain">
-					<span id="percentageToKeep-label" class="property-label"><g:message code="donation.percentageToKeep.label" default="Percentage To Keep" /></span>
-					
-						<span class="property-value" aria-labelledby="percentageToKeep-label"><g:fieldValue bean="${donationInstance}" field="percentageToKeep"/></span>
 					
 				</li>
 				</g:if>

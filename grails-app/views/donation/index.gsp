@@ -23,23 +23,37 @@
 			<table>
 			<thead>
 					<tr>
-						<g:sortableColumn property="completed" title="${message(code: 'donation.completed.label', default: 'Completed')}" />
-						<g:sortableColumn property="donationDate" title="${message(code: 'donation.donationDate.label', default: 'Donation Date')}" />
-						<g:sortableColumn property="feeAmountCurrency" title="${message(code: 'donation.feeAmountCurrency.label', default: 'Fee Amount Currency')}" />
-						<g:sortableColumn property="feeAmountValue" title="${message(code: 'donation.feeAmountValue.label', default: 'Fee Amount Value')}" />
-						<g:sortableColumn property="grossAmountCurrency" title="${message(code: 'donation.grossAmountCurrency.label', default: 'Gross Amount Currency')}" />
+					
+						<g:sortableColumn property="percentageToKeep" title="${message(code: 'donation.percentageToKeep.label', default: 'Percentage To Keep')}" />
+					
 						<g:sortableColumn property="grossAmountValue" title="${message(code: 'donation.grossAmountValue.label', default: 'Gross Amount Value')}" />
+					
+						<th><g:message code="donation.charity.label" default="Charity" /></th>
+					
+						<g:sortableColumn property="completed" title="${message(code: 'donation.completed.label', default: 'Completed')}" />
+					
+						<g:sortableColumn property="donationDate" title="${message(code: 'donation.donationDate.label', default: 'Donation Date')}" />
+					
+						<th><g:message code="donation.draw.label" default="Draw" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${donationInstanceList}" status="i" var="donationInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td><g:link action="show" id="${donationInstance.id}">${fieldValue(bean: donationInstance, field: "completed")}</g:link></td>
-						<td><g:formatDate date="${donationInstance.donationDate}" /></td>
-						<td>${fieldValue(bean: donationInstance, field: "feeAmountCurrency")}</td>
-						<td>${fieldValue(bean: donationInstance, field: "feeAmountValue")}</td>
-						<td>${fieldValue(bean: donationInstance, field: "grossAmountCurrency")}</td>
+					
+						<td><g:link action="show" id="${donationInstance.id}">${fieldValue(bean: donationInstance, field: "percentageToKeep")}</g:link></td>
+					
 						<td>${fieldValue(bean: donationInstance, field: "grossAmountValue")}</td>
+					
+						<td>${fieldValue(bean: donationInstance, field: "charity")}</td>
+					
+						<td><g:formatBoolean boolean="${donationInstance.completed}" /></td>
+					
+						<td><g:formatDate date="${donationInstance.donationDate}" /></td>
+					
+						<td>${fieldValue(bean: donationInstance, field: "draw")}</td>
+					
 					</tr>
 				</g:each>
 				</tbody>
