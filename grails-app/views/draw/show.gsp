@@ -22,40 +22,31 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list draw">
-			
 				<g:if test="${drawInstance?.active}">
 				<li class="fieldcontain">
 					<span id="active-label" class="property-label"><g:message code="draw.active.label" default="Active" /></span>
-					
-						<span class="property-value" aria-labelledby="active-label"><g:formatBoolean boolean="${drawInstance?.active}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${drawInstance?.endDate}">
-				<li class="fieldcontain">
-					<span id="endDate-label" class="property-label"><g:message code="draw.endDate.label" default="End Date" /></span>
-					
-						<span class="property-value" aria-labelledby="endDate-label"><g:formatDate date="${drawInstance?.endDate}" /></span>
-					
+					<span class="property-value" aria-labelledby="active-label"><g:formatBoolean boolean="${drawInstance?.active}" /></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${drawInstance?.startDate}">
 				<li class="fieldcontain">
 					<span id="startDate-label" class="property-label"><g:message code="draw.startDate.label" default="Start Date" /></span>
-					
-						<span class="property-value" aria-labelledby="startDate-label"><g:formatDate date="${drawInstance?.startDate}" /></span>
-					
+					<span class="property-value" aria-labelledby="startDate-label"><g:formatDate date="${drawInstance?.startDate}" /></span>
+				</li>
+				</g:if>
+			
+				<g:if test="${drawInstance?.endDate}">
+				<li class="fieldcontain">
+					<span id="endDate-label" class="property-label"><g:message code="draw.endDate.label" default="End Date" /></span>
+					<span class="property-value" aria-labelledby="endDate-label"><g:formatDate date="${drawInstance?.endDate}" /></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${drawInstance?.status}">
 				<li class="fieldcontain">
 					<span id="status-label" class="property-label"><g:message code="draw.status.label" default="Status" /></span>
-					
-						<span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${drawInstance}" field="status"/></span>
-					
+					<span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${drawInstance}" field="status"/></span>
 				</li>
 				</g:if>
 			

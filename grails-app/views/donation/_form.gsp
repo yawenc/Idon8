@@ -1,14 +1,11 @@
 <%@ page import="com.bertazoli.charity.Donation" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: donationInstance, field: 'percentageToKeep', 'error')} required">
 	<label for="percentageToKeep">
 		<g:message code="donation.percentageToKeep.label" default="Percentage To Keep" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select name="percentageToKeep" from="${0..30}" class="range" required="" value="${fieldValue(bean: donationInstance, field: 'percentageToKeep')}"/>
-
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: donationInstance, field: 'grossAmountValue', 'error')} required">
@@ -17,9 +14,9 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="grossAmountValue" value="${fieldValue(bean: donationInstance, field: 'grossAmountValue')}" required=""/>
-
 </div>
 
+<!-- 
 <div class="fieldcontain ${hasErrors(bean: donationInstance, field: 'charity', 'error')} required">
 	<label for="charity">
 		<g:message code="donation.charity.label" default="Charity" />
@@ -92,15 +89,6 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: donationInstance, field: 'paymentType', 'error')} required">
-	<label for="paymentType">
-		<g:message code="donation.paymentType.label" default="Payment Type" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="paymentType" required="" value="${donationInstance?.paymentType}"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: donationInstance, field: 'paypalToken', 'error')} required">
 	<label for="paypalToken">
 		<g:message code="donation.paypalToken.label" default="Paypal Token" />
@@ -146,3 +134,4 @@
 
 </div>
 
+ -->

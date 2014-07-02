@@ -8,4 +8,10 @@ class UserDetails {
 	Date dateOfBirth
 	
 	static belongsTo = [user:User]
+	
+	static constraints = {
+		firstName blank: false
+		lastName blank:false 
+		dateOfBirth blank:false
+	} 
 }

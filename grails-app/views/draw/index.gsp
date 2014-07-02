@@ -23,29 +23,19 @@
 			<table>
 			<thead>
 					<tr>
-					
 						<g:sortableColumn property="active" title="${message(code: 'draw.active.label', default: 'Active')}" />
-					
-						<g:sortableColumn property="endDate" title="${message(code: 'draw.endDate.label', default: 'End Date')}" />
-					
 						<g:sortableColumn property="startDate" title="${message(code: 'draw.startDate.label', default: 'Start Date')}" />
-					
+						<g:sortableColumn property="endDate" title="${message(code: 'draw.endDate.label', default: 'End Date')}" />
 						<g:sortableColumn property="status" title="${message(code: 'draw.status.label', default: 'Status')}" />
-					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${drawInstanceList}" status="i" var="drawInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
 						<td><g:link action="show" id="${drawInstance.id}">${fieldValue(bean: drawInstance, field: "active")}</g:link></td>
-					
-						<td><g:formatDate date="${drawInstance.endDate}" /></td>
-					
 						<td><g:formatDate date="${drawInstance.startDate}" /></td>
-					
+						<td><g:formatDate date="${drawInstance.endDate}" /></td>
 						<td>${fieldValue(bean: drawInstance, field: "status")}</td>
-					
 					</tr>
 				</g:each>
 				</tbody>

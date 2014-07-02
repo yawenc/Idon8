@@ -82,37 +82,49 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<g:each in="${selectedCharities}" status="i" var="charity">
-			${charity.name}
-		</g:each>
-		<div id="status" role="complementary">
-			<h1>Application Status</h1>
-			<ul>
-				<li>App version: <g:meta name="app.version"/></li>
-				<li>Grails version: <g:meta name="app.grails.version"/></li>
-				<li>Groovy version: ${GroovySystem.getVersion()}</li>
-				<li>JVM version: ${System.getProperty('java.version')}</li>
-				<li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
-				<li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-				<li>Domains: ${grailsApplication.domainClasses.size()}</li>
-				<li>Services: ${grailsApplication.serviceClasses.size()}</li>
-				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-			</ul>
-			<h1>Installed Plugins</h1>
-			<ul>
-				<g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-					<li>${plugin.name} - ${plugin.version}</li>
-				</g:each>
-			</ul>
+		List if charities that have been selected
+		<div>
+			<g:each in="${selectedCharities}" status="i" var="charity">
+				<li class="controller">
+					<g:link url="donation/index/${charity.id}">${charity.name}</g:link>
+				</li>
+			</g:each>
+		</div>
+		
+		List of charities that have never been selected
+		<div>
+			<g:each in="${notSelectedCharities}" status="i" var="charity">
+				<li class="controller">
+					<g:link url="donation/index/${charity.id}">${charity.name}</g:link>
+				</li>
+			</g:each>
 		</div>
 		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
-
-			<g:link url="donate">Donate</g:link>
+			<g:link url="donation">Donate</g:link>
+			<g:link url="register">Register</g:link>
+			<g:form url='[controller: "index", action: "index"]' id="searchableForm" name="searchableForm" method="get">
+		        <g:textField name="q" value="${params.q}" size="50"/> <input type="submit" value="Search" />
+		    </g:form>
+		    <g:if test="${searchResult?.results}">
+		      <div class="results">
+		        <g:each var="result" in="${searchResult.results}" status="index">
+		          <div class="result">
+		            <g:link url="donation/index/${result.id}">${result.name}</g:link>
+		          </div>
+		        </g:each>
+		      </div>
+		
+		      <div>
+		        <div class="paging">
+		          <g:if test="${haveResults}">
+		              Page:
+		              <g:set var="totalPages" value="${Math.ceil(searchResult.total / searchResult.max)}" />
+		              <g:if test="${totalPages == 1}"><span class="currentStep">1</span></g:if>
+		              <g:else><g:paginate controller="searchable" action="index" params="[q: params.q]" total="${searchResult.total}" prev="&lt; previous" next="next &gt;"/></g:else>
+		          </g:if>
+		        </div>
+		      </div>
+		    </g:if>
 			<div id="controller-list" role="navigation">
 				<h2>Available Controllers:</h2>
 				<ul>

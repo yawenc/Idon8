@@ -69,3 +69,11 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: charityInstance, field: 'active', 'error')} ">
+	<label for="active">
+		<g:message code="charity.active.label" default="Active" />
+		
+	</label>
+	<g:checkBox name="active" value="${charityInstance?.active}" />
+
+</div>

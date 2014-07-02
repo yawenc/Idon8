@@ -31,7 +31,13 @@ class DrawController {
             notFound()
             return
         }
+		
+		fixStartDate(params, drawInstance)
+		fixEndDate(params, drawInstance)
 
+		drawInstance.clearErrors()
+		drawInstance.validate()
+		
         if (drawInstance.hasErrors()) {
             respond drawInstance.errors, view:'create'
             return
@@ -47,6 +53,26 @@ class DrawController {
             '*' { respond drawInstance, [status: CREATED] }
         }
     }
+	
+	def fixEndDate(params, drawInstance) {
+		if (params.endDate) {
+			drawInstance.endDate = Date.parse('dd/MM/yyyy', params.endDate)
+		}
+
+		Calendar cal = Calendar.getInstance()
+		cal.setTime(drawInstance.endDate)
+		cal.set(Calendar.HOUR, 23)
+		cal.set(Calendar.MINUTE, 59)
+		cal.set(Calendar.SECOND, 59)
+		cal.set(Calendar.MILLISECOND, 999)
+		drawInstance.endDate = cal.getTime();
+	}
+	
+	def fixStartDate(params, drawInstance) {
+		if (params.startDate) {
+			drawInstance.startDate = Date.parse('dd/MM/yyyy', params.startDate)
+		}
+	}
 
     def edit(Draw drawInstance) {
         respond drawInstance
@@ -58,6 +84,12 @@ class DrawController {
             notFound()
             return
         }
+		
+		fixStartDate(params, drawInstance)
+		fixEndDate(params, drawInstance)
+		
+		drawInstance.clearErrors()
+		drawInstance.validate()
 
         if (drawInstance.hasErrors()) {
             respond drawInstance.errors, view:'edit'

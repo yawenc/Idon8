@@ -4,6 +4,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'draw.label', default: 'Draw')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
+		<script src="/Charity/js/draw.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<a href="#create-draw" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.*
 
 import com.bertazoli.charity.enums.CharityStatus;
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured;
 import grails.transaction.Transactional
 
@@ -14,6 +15,7 @@ import grails.transaction.Transactional
 class CharityController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	def charityService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -96,6 +98,10 @@ class CharityController {
             '*'{ render status: NO_CONTENT }
         }
     }
+	
+	def autoCompleteList = {
+		render charityService.autoCompleteList(params) as JSON
+	}
 
     protected void notFound() {
         request.withFormat {

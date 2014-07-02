@@ -44,11 +44,13 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+		mavenRepo "http://repo.grails.org/grails/core"
     }
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         runtime 'mysql:mysql-connector-java:5.1.27'
+		runtime 'com.paypal.sdk:merchantsdk:2.9.115'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
     }
 
@@ -62,6 +64,9 @@ grails.project.dependency.resolution = {
 		compile ":spring-security-core:2.0-RC3"
 		compile ":spring-security-ui:1.0-RC2"
 		compile ":csv:0.3.1"
+		compile ":searchable:0.6.8"
+		compile ":calendar:1.2.1"
+		compile ":jquery-ui:1.10.3"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.13" // or ":hibernate4:4.3.5.1"

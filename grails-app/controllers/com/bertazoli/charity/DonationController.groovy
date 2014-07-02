@@ -3,18 +3,31 @@ package com.bertazoli.charity
 
 
 import static org.springframework.http.HttpStatus.*
+import urn.ebay.apis.eBLBaseComponents.CurrencyCodeType;
+import urn.ebay.apis.eBLBaseComponents.PaymentCodeType;
+import urn.ebay.apis.eBLBaseComponents.PaymentStatusCodeType;
+import com.bertazoli.charity.auth.User
 import grails.plugin.springsecurity.annotation.Secured;
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 @Secured(["ROLE_USER"])
 class DonationController {
-	static defaultAction = "create"
+	static defaultAction = "index"
+	
+	def charityService
+	def drawService
+	def springSecurityService
+	
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Donation.list(params), model:[donationInstanceCount: Donation.count()]
+		def charity
+		if (params?.id) {
+			charity = Charity.get(params.id)
+		}
+
+        respond Donation.list(params), model:[charity: charity]
     }
 
     def show(Donation donationInstance) {
@@ -31,9 +44,25 @@ class DonationController {
             notFound()
             return
         }
+		
+		donationInstance.completed = false
+		donationInstance.donationDate = new Date()
+		donationInstance.draw = drawService.getCurrentDraw()
+		donationInstance.feeAmountCurrency = CurrencyCodeType.CAD
+		donationInstance.feeAmountValue = -1;
+		donationInstance.grossAmountCurrency = CurrencyCodeType.CAD
+		donationInstance.paymentCode = PaymentCodeType.NONE
+		donationInstance.paymentStatusCode = PaymentStatusCodeType.NONE
+		donationInstance.paypalToken = "NOT COMPLETED"
+		donationInstance.transaction = "NOT COMPLETED"
+		donationInstance.paymentStatus = "NOT COMPLETED"
+		User user = User.findByUsername(springSecurityService.principal.username)
+		donationInstance.user = user;
 
+		donationInstance.validate();
+		
         if (donationInstance.hasErrors()) {
-            respond donationInstance.errors, view:'create'
+            respond donationInstance.errors, view:'index'
             return
         }
 

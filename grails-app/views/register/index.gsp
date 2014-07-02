@@ -17,28 +17,39 @@
 	<g:if test='${emailSent}'>
 	<br/>
 	<g:message code='spring.security.ui.register.sent'/>
+	<g:link url="/Charity">Click here to go back</g:link>
 	</g:if>
 	<g:else>
 
 	<br/>
+	<s2ui:textFieldRow name='username' labelCode='user.username.label'
+		bean="${command}" size='40' labelCodeDefault='Username'
+		value="${command.username}" />
+	
+	<s2ui:textFieldRow name='firstName' labelCode='user.firstName.label'
+		bean="${command}" size='40' labelCodeDefault='First Name'
+		value="${command.firstName}" />
+	
+	<s2ui:textFieldRow name='lastName' labelCode='user.lastName.label'
+		bean="${command}" size='40' labelCodeDefault='Last Name'
+		value="${command.lastName}" />
+	
+	<g:datePicker name="dateOfBirth" labelCode="user.dateOfBirth.label"
+		bean="${command}" precision="day" years="${1914..1996}" value="${command.dateOfBirth}"
+		labelCodeDefault='Date of birth' />
+	
+	<s2ui:textFieldRow name='email' bean="${command}"
+		value="${command.email}" size='40' labelCode='user.email.label'
+		labelCodeDefault='E-mail' />
+	
+	<s2ui:passwordFieldRow name='password'
+		labelCode='user.password.label' bean="${command}" size='40'
+		labelCodeDefault='Password' value="${command.password}" />
+	
+	<s2ui:passwordFieldRow name='password2'
+		labelCode='user.password2.label' bean="${command}" size='40'
+		labelCodeDefault='Password (again)' value="${command.password2}" />
 
-	<table>
-	<tbody>
-
-		<s2ui:textFieldRow name='username' labelCode='user.username.label' bean="${command}"
-                         size='40' labelCodeDefault='Username' value="${command.username}"/>
-
-		<s2ui:textFieldRow name='email' bean="${command}" value="${command.email}"
-		                   size='40' labelCode='user.email.label' labelCodeDefault='E-mail'/>
-
-		<s2ui:passwordFieldRow name='password' labelCode='user.password.label' bean="${command}"
-                             size='40' labelCodeDefault='Password' value="${command.password}"/>
-
-		<s2ui:passwordFieldRow name='password2' labelCode='user.password2.label' bean="${command}"
-                             size='40' labelCodeDefault='Password (again)' value="${command.password2}"/>
-
-	</tbody>
-	</table>
 
 	<s2ui:submitButton elementId='create' form='registerForm' messageCode='spring.security.ui.register.submit'/>
 

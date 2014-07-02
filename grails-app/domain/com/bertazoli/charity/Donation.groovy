@@ -1,24 +1,29 @@
 package com.bertazoli.charity
 
+import urn.ebay.apis.eBLBaseComponents.CurrencyCodeType;
+import urn.ebay.apis.eBLBaseComponents.PaymentCodeType;
+import urn.ebay.apis.eBLBaseComponents.PaymentStatusCodeType;
+
 import com.bertazoli.charity.auth.User
 
 class Donation {
 	Integer percentageToKeep
 	Date donationDate
 	String transaction
-	String feeAmountCurrency
+	CurrencyCodeType feeAmountCurrency
 	BigDecimal feeAmountValue
-	String grossAmountCurrency
+	CurrencyCodeType grossAmountCurrency
 	BigDecimal grossAmountValue
 	String paymentStatus
-	String paymentType
 	Boolean completed
 	String paypalToken
+	PaymentCodeType paymentCode
+	PaymentStatusCodeType paymentStatusCode
 	
 	static constraints = {
 		percentageToKeep blank: false, range: 0..30
 		grossAmountValue blank: false, validator: {
-			return ((int)it %5) == 0
+			return (it >= 15 && it.remainder(new BigDecimal(5)) == 0)
 		}
 	}
 	

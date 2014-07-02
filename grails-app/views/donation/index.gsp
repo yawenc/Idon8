@@ -1,4 +1,3 @@
-
 <%@ page import="com.bertazoli.charity.Donation" %>
 <!DOCTYPE html>
 <html>
@@ -6,36 +5,56 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'donation.label', default: 'Donation')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<script src="/Charity/js/donation.js" type="text/javascript"></script>
 	</head>
 	<body>
+		<g:if test="${charity != null}">
+		     <h1><g:message code="donation.create.label" args="[charity?.name]" /></h1>
+		</g:if>
+		<g:else>
+		     <g:textField name="charitySearch"/>
+		</g:else>
+		
 		<a href="#list-donation" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<!-- <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>-->
 			</ul>
 		</div>
 		<div id="list-donation" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1><g:message code="donation.make.label"/></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			<g:hasErrors bean="${donationInstance}">
+			<ul class="errors" role="alert">
+				<g:eachError bean="${donationInstance}" var="error">
+				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+				</g:eachError>
+			</ul>
+			</g:hasErrors>
+			
+			<g:form url="[resource:donationInstance, action:'save']" >
+				<g:hiddenField name="charity.id" value="${charity != null ? charity.id : donationInstance?.charity}" />
+				<fieldset class="form">
+					<g:render template="form"/>
+				</fieldset>
+				<fieldset class="buttons">
+					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+				</fieldset>
+			</g:form>
+			
+			<!-- 
 			<table>
-			<thead>
+				<thead>
 					<tr>
-					
 						<g:sortableColumn property="percentageToKeep" title="${message(code: 'donation.percentageToKeep.label', default: 'Percentage To Keep')}" />
-					
 						<g:sortableColumn property="grossAmountValue" title="${message(code: 'donation.grossAmountValue.label', default: 'Gross Amount Value')}" />
-					
 						<th><g:message code="donation.charity.label" default="Charity" /></th>
-					
 						<g:sortableColumn property="completed" title="${message(code: 'donation.completed.label', default: 'Completed')}" />
-					
 						<g:sortableColumn property="donationDate" title="${message(code: 'donation.donationDate.label', default: 'Donation Date')}" />
-					
 						<th><g:message code="donation.draw.label" default="Draw" /></th>
-					
 					</tr>
 				</thead>
 				<tbody>
@@ -61,6 +80,7 @@
 			<div class="pagination">
 				<g:paginate total="${donationInstanceCount ?: 0}" />
 			</div>
+		 -->
 		</div>
 	</body>
 </html>

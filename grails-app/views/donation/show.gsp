@@ -26,137 +26,100 @@
 				<g:if test="${donationInstance?.percentageToKeep}">
 				<li class="fieldcontain">
 					<span id="percentageToKeep-label" class="property-label"><g:message code="donation.percentageToKeep.label" default="Percentage To Keep" /></span>
-					
-						<span class="property-value" aria-labelledby="percentageToKeep-label"><g:fieldValue bean="${donationInstance}" field="percentageToKeep"/></span>
-					
+					<span class="property-value" aria-labelledby="percentageToKeep-label"><g:fieldValue bean="${donationInstance}" field="percentageToKeep"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.grossAmountValue}">
 				<li class="fieldcontain">
 					<span id="grossAmountValue-label" class="property-label"><g:message code="donation.grossAmountValue.label" default="Gross Amount Value" /></span>
-					
-						<span class="property-value" aria-labelledby="grossAmountValue-label"><g:fieldValue bean="${donationInstance}" field="grossAmountValue"/></span>
-					
+					<span class="property-value" aria-labelledby="grossAmountValue-label"><g:fieldValue bean="${donationInstance}" field="grossAmountValue"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.charity}">
 				<li class="fieldcontain">
 					<span id="charity-label" class="property-label"><g:message code="donation.charity.label" default="Charity" /></span>
-					
-						<span class="property-value" aria-labelledby="charity-label"><g:link controller="charity" action="show" id="${donationInstance?.charity?.id}">${donationInstance?.charity?.encodeAsHTML()}</g:link></span>
-					
+					<span class="property-value" aria-labelledby="charity-label"><g:link controller="charity" action="show" id="${donationInstance?.charity?.id}">${donationInstance?.charity?.encodeAsHTML()}</g:link></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.completed}">
 				<li class="fieldcontain">
 					<span id="completed-label" class="property-label"><g:message code="donation.completed.label" default="Completed" /></span>
-					
-						<span class="property-value" aria-labelledby="completed-label"><g:formatBoolean boolean="${donationInstance?.completed}" /></span>
-					
+					<span class="property-value" aria-labelledby="completed-label"><g:formatBoolean boolean="${donationInstance?.completed}" /></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.donationDate}">
 				<li class="fieldcontain">
 					<span id="donationDate-label" class="property-label"><g:message code="donation.donationDate.label" default="Donation Date" /></span>
-					
-						<span class="property-value" aria-labelledby="donationDate-label"><g:formatDate date="${donationInstance?.donationDate}" /></span>
-					
+					<span class="property-value" aria-labelledby="donationDate-label"><g:formatDate date="${donationInstance?.donationDate}" /></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.draw}">
 				<li class="fieldcontain">
 					<span id="draw-label" class="property-label"><g:message code="donation.draw.label" default="Draw" /></span>
-					
-						<span class="property-value" aria-labelledby="draw-label"><g:link controller="draw" action="show" id="${donationInstance?.draw?.id}">${donationInstance?.draw?.encodeAsHTML()}</g:link></span>
-					
+					<span class="property-value" aria-labelledby="draw-label"><g:link controller="draw" action="show" id="${donationInstance?.draw?.id}">${donationInstance?.draw?.encodeAsHTML()}</g:link></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.feeAmountCurrency}">
 				<li class="fieldcontain">
 					<span id="feeAmountCurrency-label" class="property-label"><g:message code="donation.feeAmountCurrency.label" default="Fee Amount Currency" /></span>
-					
-						<span class="property-value" aria-labelledby="feeAmountCurrency-label"><g:fieldValue bean="${donationInstance}" field="feeAmountCurrency"/></span>
-					
+					<span class="property-value" aria-labelledby="feeAmountCurrency-label"><g:fieldValue bean="${donationInstance}" field="feeAmountCurrency"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.feeAmountValue}">
 				<li class="fieldcontain">
 					<span id="feeAmountValue-label" class="property-label"><g:message code="donation.feeAmountValue.label" default="Fee Amount Value" /></span>
-					
-						<span class="property-value" aria-labelledby="feeAmountValue-label"><g:fieldValue bean="${donationInstance}" field="feeAmountValue"/></span>
-					
+					<span class="property-value" aria-labelledby="feeAmountValue-label"><g:fieldValue bean="${donationInstance}" field="feeAmountValue"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.grossAmountCurrency}">
 				<li class="fieldcontain">
 					<span id="grossAmountCurrency-label" class="property-label"><g:message code="donation.grossAmountCurrency.label" default="Gross Amount Currency" /></span>
-					
-						<span class="property-value" aria-labelledby="grossAmountCurrency-label"><g:fieldValue bean="${donationInstance}" field="grossAmountCurrency"/></span>
-					
+					<span class="property-value" aria-labelledby="grossAmountCurrency-label"><g:fieldValue bean="${donationInstance}" field="grossAmountCurrency"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.paymentStatus}">
 				<li class="fieldcontain">
 					<span id="paymentStatus-label" class="property-label"><g:message code="donation.paymentStatus.label" default="Payment Status" /></span>
-					
-						<span class="property-value" aria-labelledby="paymentStatus-label"><g:fieldValue bean="${donationInstance}" field="paymentStatus"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${donationInstance?.paymentType}">
-				<li class="fieldcontain">
-					<span id="paymentType-label" class="property-label"><g:message code="donation.paymentType.label" default="Payment Type" /></span>
-					
-						<span class="property-value" aria-labelledby="paymentType-label"><g:fieldValue bean="${donationInstance}" field="paymentType"/></span>
-					
+					<span class="property-value" aria-labelledby="paymentStatus-label"><g:fieldValue bean="${donationInstance}" field="paymentStatus"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.paypalToken}">
 				<li class="fieldcontain">
 					<span id="paypalToken-label" class="property-label"><g:message code="donation.paypalToken.label" default="Paypal Token" /></span>
-					
-						<span class="property-value" aria-labelledby="paypalToken-label"><g:fieldValue bean="${donationInstance}" field="paypalToken"/></span>
-					
+					<span class="property-value" aria-labelledby="paypalToken-label"><g:fieldValue bean="${donationInstance}" field="paypalToken"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.tickets}">
 				<li class="fieldcontain">
 					<span id="tickets-label" class="property-label"><g:message code="donation.tickets.label" default="Tickets" /></span>
-					
-						<g:each in="${donationInstance.tickets}" var="t">
+					<g:each in="${donationInstance.tickets}" var="t">
 						<span class="property-value" aria-labelledby="tickets-label"><g:link controller="ticket" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
+					</g:each>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.transaction}">
 				<li class="fieldcontain">
 					<span id="transaction-label" class="property-label"><g:message code="donation.transaction.label" default="Transaction" /></span>
-					
-						<span class="property-value" aria-labelledby="transaction-label"><g:fieldValue bean="${donationInstance}" field="transaction"/></span>
-					
+					<span class="property-value" aria-labelledby="transaction-label"><g:fieldValue bean="${donationInstance}" field="transaction"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${donationInstance?.user}">
 				<li class="fieldcontain">
 					<span id="user-label" class="property-label"><g:message code="donation.user.label" default="User" /></span>
-					
-						<span class="property-value" aria-labelledby="user-label"><g:link controller="user" action="show" id="${donationInstance?.user?.id}">${donationInstance?.user?.encodeAsHTML()}</g:link></span>
-					
+					<span class="property-value" aria-labelledby="user-label"><g:link controller="user" action="show" id="${donationInstance?.user?.id}">${donationInstance?.user?.encodeAsHTML()}</g:link></span>
 				</li>
 				</g:if>
 			
