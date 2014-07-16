@@ -34,6 +34,8 @@ grails.mime.types = [ // the first one is the default format
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
 
+grails.databinding.dateFormats = ['dd/MM/yyyy', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss'Z'"]
+
 // What URL patterns should be processed by the resources plugin
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
 grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**']
@@ -106,9 +108,47 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+		paypal {
+			url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='
+			returnUrl = '/donation/doExpressCheckout'
+			cancelUrl = '/'
+			successUrl = '/'
+			errorUrl = '/'
+			transactionError = "/"
+			username = 'merchant_api1.bertazoli.com'
+			password = '1399164032'
+			signature = 'AFcWxV21C7fd0v3bYYYRCpSSRl31AHFA8olLbg.H1MewmnulQI17YE5y'
+			sandbox = true
+		}
     }
+	test {
+		grails.logging.jul.usebridge = true
+		paypal {
+			url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='
+			returnUrl = '/donation/doExpressCheckout'
+			cancelUrl = '/'
+			successUrl = '/'
+			errorUrl = '/'
+			transactionError = "/"
+			username = 'merchant_api1.bertazoli.com'
+			password = '1399164032'
+			signature = 'AFcWxV21C7fd0v3bYYYRCpSSRl31AHFA8olLbg.H1MewmnulQI17YE5y'
+			sandbox = true
+		}
+	}
     production {
         grails.logging.jul.usebridge = false
+		paypal {
+			url = 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='
+			returnUrl = '/donation/doExpressCheckout'
+			cancelUrl = '/'
+			successUrl = '/'
+			errorUrl = '/'
+			transactionError = "/"
+			username = 'merchant_api1.bertazoli.com'
+			password = '1399164032'
+			signature = 'AFcWxV21C7fd0v3bYYYRCpSSRl31AHFA8olLbg.H1MewmnulQI17YE5y'
+		}
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }

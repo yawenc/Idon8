@@ -11,8 +11,8 @@ class CharityService {
 		
 		// get 10 random charities that have been selected
 		def currentDraw = drawService.getCurrentDraw() 
-		def donations = Donation.findAllByDraw(currentDraw, [max: 10])
-		def charityIds = new ArrayList<Integer>();
+		def donations = Donation.findAllByDrawAndCompleted(currentDraw, true, [max: 10])
+		def Set<Integer> charityIds = new HashSet<Integer>();
 		for (donation in donations) {
 			charityIds.add(donation.charity.id)
 		}
@@ -22,7 +22,7 @@ class CharityService {
 	
 	def getNotSelectedCharities(Integer max) {
 		def selectedCharities;
-		selectedCharities = Charity.executeQuery("from Charity where id not in (SELECT charity from Donation) and active = true order by rand()", [max: max ?: 10])
+		selectedCharities = Charity.executeQuery("from Charity where id not in (SELECT charity from Donation where completed = true) and active = true order by rand()", [max: max ?: 10])
 		return selectedCharities
 	}
 	
@@ -35,6 +35,7 @@ class CharityService {
 			and {
 				eq("active", true)
 			}
+            maxResults(20)
 		}
 		def clist = Charity.createCriteria().list(query)
 		def charityList = []

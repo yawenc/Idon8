@@ -67,6 +67,8 @@ grails.project.dependency.resolution = {
 		compile ":searchable:0.6.8"
 		compile ":calendar:1.2.1"
 		compile ":jquery-ui:1.10.3"
+		compile ':quartz:1.0.1'
+		compile ":joda-time:1.5"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.13" // or ":hibernate4:4.3.5.1"

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        <r:require modules="jqPlot" />
 		<meta name="layout" content="main"/>
-		<title>Blah</title>
+		<title>I-don8.org</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -79,9 +80,80 @@
 				}
 			}
 		</style>
+		<script src="${resource(dir: 'js', file: 'index.js')}" type="text/javascript"></script>
+		<script type="text/javascript">
+		$(document).ready( function() {
+			$("#charitySearch").autocomplete({
+				source : function(request, response) {
+					$.ajax({
+						url : "${request.contextPath}/charity/autoCompleteList", // remote datasource
+						data : request,
+						success : function(data) {
+							response(data); // set the response
+						},
+						error : function() { // handle server errors
+							$.jGrowl("Unable to retrieve Charities", {
+								theme : 'ui-state-error ui-corner-all'
+							});
+						}
+					});
+				},
+				minLength : 2, // triggered only after minimum 2 characters have been entered.
+				select : function(event, ui) {
+					$("#charityName").text(ui.item.id);
+					window.location.replace('donation/index/'+ui.item.id);
+				}
+			});
+
+            var ajaxDataRenderer = function(url, plot, options) {
+                var ret = null;
+                $.ajax({
+                    async: false,
+                    url: url,
+                    dataType: "json",
+                    success: function(data) {
+                        ret = data;
+                    }
+                })
+                return ret;
+            };
+            var serverURL = "index/percentageToKeep"
+            var plot = $.jqplot('chart2', serverURL, {
+               title: "Percentage people selected to keep to themselves",
+                dataRenderer: ajaxDataRenderer,
+                seriesDefaults: {
+                    renderer: $.jqplot.PieRenderer,
+                    rendererOptions: {showDataLabels: true}
+                },
+                legend:{
+                    show:true,
+                    placement: 'outside',
+                    rendererOptions: {
+                        numberRows: 1
+                    },
+                    location:'s',
+                    marginTop: '15px'
+                },
+                dataRendererOptions: {
+                    unusedOptionalUrl: serverURL
+                }
+            });
+		});
+		</script>
 	</head>
 	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<sec:ifLoggedIn>
+			<g:message code="index.welcomeBack" args="${sec.username()}"/><br/>
+            <g:link controller="logout">Logout</g:link><br/>
+            <g:link controller="donation" action="myDonations"><g:message code="index.myDonations" default="My donations"/></g:link><br/>
+			<sec:ifAllGranted roles="ROLE_ADMIN">
+				<g:link controller="admin">Admin</g:link><br/>
+			</sec:ifAllGranted>
+		</sec:ifLoggedIn>
+		<sec:ifNotLoggedIn>
+			<g:link controller="login">Login</g:link><br/>
+			<g:link controller="register">Register</g:link><br/>
+		</sec:ifNotLoggedIn>
 		List if charities that have been selected
 		<div>
 			<g:each in="${selectedCharities}" status="i" var="charity">
@@ -90,7 +162,7 @@
 				</li>
 			</g:each>
 		</div>
-		
+
 		List of charities that have never been selected
 		<div>
 			<g:each in="${notSelectedCharities}" status="i" var="charity">
@@ -99,40 +171,20 @@
 				</li>
 			</g:each>
 		</div>
+
+        <div>
+            <g:message code="index.donation.totalDonated" default="Total donated" />
+            <g:formatNumber number="${totalDonated}" type="number" formatName="default.currency.format" />
+        </div>
 		<div id="page-body" role="main">
 			<g:link url="donation">Donate</g:link>
-			<g:link url="register">Register</g:link>
-			<g:form url='[controller: "index", action: "index"]' id="searchableForm" name="searchableForm" method="get">
-		        <g:textField name="q" value="${params.q}" size="50"/> <input type="submit" value="Search" />
-		    </g:form>
-		    <g:if test="${searchResult?.results}">
-		      <div class="results">
-		        <g:each var="result" in="${searchResult.results}" status="index">
-		          <div class="result">
-		            <g:link url="donation/index/${result.id}">${result.name}</g:link>
-		          </div>
-		        </g:each>
-		      </div>
-		
-		      <div>
-		        <div class="paging">
-		          <g:if test="${haveResults}">
-		              Page:
-		              <g:set var="totalPages" value="${Math.ceil(searchResult.total / searchResult.max)}" />
-		              <g:if test="${totalPages == 1}"><span class="currentStep">1</span></g:if>
-		              <g:else><g:paginate controller="searchable" action="index" params="[q: params.q]" total="${searchResult.total}" prev="&lt; previous" next="next &gt;"/></g:else>
-		          </g:if>
-		        </div>
-		      </div>
-		    </g:if>
-			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
-				</ul>
+			<div>
+				<g:textField name="charitySearch"/>
 			</div>
+		    <div>
+		    	<span id="charityName"></span>
+		    </div>
 		</div>
+        <div id="chart2" style="margin-top:20px; margin-left:20px; width:200px; height:200px;"></div>
 	</body>
 </html>

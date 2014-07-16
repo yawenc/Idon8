@@ -142,10 +142,6 @@ databaseChangeLog = {
 				constraints(nullable: "false")
 			}
 
-			column(name: "payment_status", type: "varchar(255)") {
-				constraints(nullable: "false")
-			}
-
 			column(name: "payment_status_code", type: "varchar(255)") {
 				constraints(nullable: "false")
 			}

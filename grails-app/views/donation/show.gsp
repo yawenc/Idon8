@@ -86,13 +86,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${donationInstance?.paymentStatus}">
-				<li class="fieldcontain">
-					<span id="paymentStatus-label" class="property-label"><g:message code="donation.paymentStatus.label" default="Payment Status" /></span>
-					<span class="property-value" aria-labelledby="paymentStatus-label"><g:fieldValue bean="${donationInstance}" field="paymentStatus"/></span>
-				</li>
-				</g:if>
-			
 				<g:if test="${donationInstance?.paypalToken}">
 				<li class="fieldcontain">
 					<span id="paypalToken-label" class="property-label"><g:message code="donation.paypalToken.label" default="Paypal Token" /></span>

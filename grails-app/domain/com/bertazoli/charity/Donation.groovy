@@ -14,7 +14,6 @@ class Donation {
 	BigDecimal feeAmountValue
 	CurrencyCodeType grossAmountCurrency
 	BigDecimal grossAmountValue
-	String paymentStatus
 	Boolean completed
 	String paypalToken
 	PaymentCodeType paymentCode

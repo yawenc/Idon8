@@ -15,6 +15,11 @@
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
+		
+		<g:link class="newDraw" action="newdraw">
+			<g:message code="draw.create.new"/>
+		</g:link>
+		
 		<div id="list-draw" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">

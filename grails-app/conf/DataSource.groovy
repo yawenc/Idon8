@@ -28,9 +28,29 @@ environments {
 	test {
 		dataSource {
 //			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
-			url = "jdbc:mysql://localhost/TESTDBNAME?useUnicode=yes&characterEncoding=UTF-8"
-			username = "test"
-			password = "testpw"
+			url = "jdbc:mysql://bertazoli.com/bertazol_idon8?useUnicode=yes&characterEncoding=UTF-8"
+			username = "bertazol_idon8"
+			password = "1q2w3e4r"
+			properties {
+				// See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
+				jmxEnabled = true
+				initialSize = 5
+				maxActive = 50
+				minIdle = 5
+				maxIdle = 25
+				maxWait = 10000
+				maxAge = 10 * 60000
+				timeBetweenEvictionRunsMillis = 5000
+				minEvictableIdleTimeMillis = 60000
+				validationQuery = "SELECT 1"
+				validationQueryTimeout = 3
+				validationInterval = 15000
+				testOnBorrow = true
+				testWhileIdle = true
+				testOnReturn = false
+				jdbcInterceptors = "ConnectionState"
+				defaultTransactionIsolation = java.sql.Connection.TRANSACTION_READ_COMMITTED
+			 }
 		}
 	}
     production {

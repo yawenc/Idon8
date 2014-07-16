@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 @Secured(["ROLE_ADMIN"])
 class DrawController {
-
+	def drawService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -24,6 +24,13 @@ class DrawController {
     def create() {
         respond new Draw(params)
     }
+	
+	def newdraw() {
+		def draw = new Draw()
+		def today = new Date()
+		def currentDraw = drawService.getCurrentDraw()
+		respond draw
+	}
 
     @Transactional
     def save(Draw drawInstance) {

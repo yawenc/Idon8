@@ -1,11 +1,16 @@
 package com.bertazoli.charity.auth
 
+import org.joda.time.DateTime
+import org.joda.time.Period;
+
 import grails.plugin.springsecurity.annotation.Secured;
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
 import grails.plugin.springsecurity.ui.RegistrationCode
+
 import com.bertazoli.charity.user.UserDetails
-import org.codehaus.groovy.grails.commons.ApplicationHolder as AH
+
 import grails.plugin.springsecurity.SpringSecurityUtils;
+import groovy.time.TimeCategory;
 
 @Secured('IS_AUTHENTICATED_ANONYMOUSLY')
 class RegisterController extends grails.plugin.springsecurity.ui.RegisterController {
@@ -53,6 +58,8 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
 
 class RegisterCommand {
 	
+	def grailsApplication
+	
 	String username
 	String email
 	String password
@@ -60,14 +67,25 @@ class RegisterCommand {
 	String firstName
 	String lastName
 	Date dateOfBirth
-
+	
 	static constraints = {
 		username blank: false, validator: { value, command ->
 			if (value) {
-				def User = AH.application.getDomainClass(
+				def User = command.grailsApplication.getDomainClass(
 					SpringSecurityUtils.securityConfig.userLookup.userDomainClassName).clazz
 				if (User.findByUsername(value)) {
 					return 'registerCommand.username.unique'
+				}
+			}
+		}
+		dateOfBirth blank: false, validator: {value, command ->
+			if (value) {
+				def today = new Date()
+				DateTime dt1 = new DateTime(value);
+				DateTime dt2 = new DateTime(today)
+				Period period = new Period(dt1, dt2)
+				if (period.years < 18) {
+					return 'registerCommand.dateOfBirth.eighteenOrOlder'
 				}
 			}
 		}

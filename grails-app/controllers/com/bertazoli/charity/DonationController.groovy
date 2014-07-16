@@ -1,6 +1,6 @@
 package com.bertazoli.charity
 
-
+import grails.converters.JSON
 
 import static org.springframework.http.HttpStatus.*
 import urn.ebay.apis.eBLBaseComponents.CurrencyCodeType;
@@ -18,6 +18,7 @@ class DonationController {
 	def charityService
 	def drawService
 	def springSecurityService
+	def donationService
 	
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -55,7 +56,6 @@ class DonationController {
 		donationInstance.paymentStatusCode = PaymentStatusCodeType.NONE
 		donationInstance.paypalToken = "NOT COMPLETED"
 		donationInstance.transaction = "NOT COMPLETED"
-		donationInstance.paymentStatus = "NOT COMPLETED"
 		User user = User.findByUsername(springSecurityService.principal.username)
 		donationInstance.user = user;
 
@@ -66,8 +66,14 @@ class DonationController {
             return
         }
 
+		// save the temporary donation
         donationInstance.save flush:true
 
+		// if passes validation then initializes communication with Paypal
+		def redirectURL = donationService.initializeDonation(['donationInstance':donationInstance, 'user':user])
+		redirect(url: redirectURL)
+
+		/*
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'donation.label', default: 'Donation'), donationInstance.id])
@@ -75,6 +81,13 @@ class DonationController {
             }
             '*' { respond donationInstance, [status: CREATED] }
         }
+        */
+    }
+
+    def myDonations() {
+        def User user = User.findByUsername(springSecurityService.principal.username)
+        def myDonations = Donation.findAllByUserAndCompleted(user, true)
+        ['myDonations': myDonations]
     }
 
     def edit(Donation donationInstance) {
@@ -132,4 +145,10 @@ class DonationController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	@Transactional
+	def doExpressCheckout(params) {
+		def redirectURL = donationService.doExpressCheckout(params)
+		redirect(url: redirectURL)
+	}
 }

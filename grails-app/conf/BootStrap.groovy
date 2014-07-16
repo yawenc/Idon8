@@ -15,10 +15,10 @@ class BootStrap {
 	def grailsApplication
 	def dataSource
 	def searchableService
+    def drawService
 	
 	def init = { servletContext ->
-//		searchableService.reindex()
-//		searchableService.startMirroring()
+        drawService.createCurrentDraw()
 	}
 	def destroy = {
 	}
