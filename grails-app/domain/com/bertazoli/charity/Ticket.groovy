@@ -4,5 +4,5 @@ class Ticket {
 	
 	String ticketNumber
 	
-	static belongsTo = [donation:Donation]
+	static belongsTo = [donation:Donation, draw:Draw]
 }

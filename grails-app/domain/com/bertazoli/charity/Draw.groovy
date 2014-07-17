@@ -7,6 +7,11 @@ class Draw {
 	Date endDate
 	DrawStatus status
 	Boolean active
-	
+
 	static hasMany = [donations:Donation]
+    static hasOne = [winner:Ticket]
+
+    static constraints = {
+        winner nullable: true, blank: true
+    }
 }

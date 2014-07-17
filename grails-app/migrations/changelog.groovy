@@ -497,4 +497,6 @@ databaseChangeLog = {
 	}
 	
 	include file: 'charity.groovy'
+
+	include file: 'add-draw-ticket-relationship.groovy'
 }

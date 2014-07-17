@@ -154,7 +154,7 @@
 			<g:link controller="login">Login</g:link><br/>
 			<g:link controller="register">Register</g:link><br/>
 		</sec:ifNotLoggedIn>
-		List if charities that have been selected
+        <g:message code="index.listOfSelectedCharities.label" default="List of charities that have been selected" />
 		<div>
 			<g:each in="${selectedCharities}" status="i" var="charity">
 				<li class="controller">
@@ -163,7 +163,7 @@
 			</g:each>
 		</div>
 
-		List of charities that have never been selected
+        <g:message code="index.listOfNeverSelectedCharities.label" default="List of charities that have never been selected" />
 		<div>
 			<g:each in="${notSelectedCharities}" status="i" var="charity">
 				<li class="controller">
@@ -179,7 +179,8 @@
 		<div id="page-body" role="main">
 			<g:link url="donation">Donate</g:link>
 			<div>
-				<g:textField name="charitySearch"/>
+            <g:message code="index.searchForACharity.label" default="Search for a charity" />
+            <g:textField name="charitySearch"/>
 			</div>
 		    <div>
 		    	<span id="charityName"></span>

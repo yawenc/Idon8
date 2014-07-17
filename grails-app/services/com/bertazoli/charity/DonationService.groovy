@@ -231,4 +231,47 @@ class DonationService {
 		}
 		return configurationMap;
 	}
+
+    def calculateWinner(Draw draw) {
+        // get all donations for the current draw
+        def donations = Donation.findAllByDrawAndCompletedAndPaymentStatusCode(draw, true, PaymentStatusCodeType.COMPLETED)
+
+        // get all the tickets for the current list of donations
+        List<Ticket> tickets = new ArrayList<Ticket>();
+        def BigDecimal totalPrize;
+        donations.each {
+            tickets.addAll(it.tickets);
+            totalPrize = totalPrize.add(it.grossAmountValue.multiply(0.93))
+        }
+
+        // get the total number of tickets generated
+        def quantity = tickets.size();
+
+        // select a random number between 0 and the total number of tickets generated
+        int selectedNumber = (int) (Math.random() * quantity);
+
+        // there always must be one and only one winner
+        Ticket winner = tickets.get(selectedNumber)
+
+        // update draw with the winner
+        draw.winner = winner;
+        draw.save(flush: true)
+
+        def userPrize = totalPrize.multiply(new BigDecimal(winner.donation.percentageToKeep%100))
+        def charityPrize = totalPrize.min(userPrize)
+        // notify winner
+        mailService.sendMail {
+            def body = """Congratulations, your donation of $winner.donation.grossAmountValue to $winner.donation.charity.name
+            has been selected and you and the charity will be receiveing your award soon.
+            This is the winner ticket number: $winner.ticketNumber
+            Total prize: $totalPrize
+            Total you choose to keep to your self: $winner.donation.percentageToKeep
+            Charity prize: $charityPrize
+            Your prize: $userPrize
+            """
+            to winner.donation.user.email
+            subject "Your are the winner"
+            html body
+        }
+    }
 }
