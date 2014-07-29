@@ -179,7 +179,7 @@
 		<div id="page-body" role="main">
 			<g:link url="donation">Donate</g:link>
 			<div>
-            <g:message code="index.searchForACharity.label" default="Search for a charity" />
+            <g:message code="default.searchForACharity.label" default="Search for a charity" />
             <g:textField name="charitySearch"/>
 			</div>
 		    <div>

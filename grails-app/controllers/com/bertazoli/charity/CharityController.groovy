@@ -98,8 +98,9 @@ class CharityController {
             '*'{ render status: NO_CONTENT }
         }
     }
-	
-	def autoCompleteList = {
+
+    @Secured('IS_AUTHENTICATED_ANONYMOUSLY')
+	def autoCompleteList() {
 		render charityService.autoCompleteList(params) as JSON
 	}
 

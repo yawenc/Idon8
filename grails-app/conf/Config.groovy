@@ -79,6 +79,9 @@ grails {
 grails.mail.default.from="no-reply@bertazoli.com"
 grails.plugin.springsecurity.ui.register.emailFrom = 'no-reply@bertazoli.com'
 grails.plugin.springsecurity.ui.forgotPassword.emailFrom = 'no-reply@bertazoli.com'
+grails.plugin.springsecurity.ui.password.minLength=6
+grails.plugin.springsecurity.ui.password.maxLength=64
+//grails.plugin.springsecurity.ui.password.validationRegex='^([a-zA-Z0-9@*#_%])$'
 
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
@@ -113,7 +116,7 @@ environments {
 			returnUrl = '/donation/doExpressCheckout'
 			cancelUrl = '/'
 			successUrl = '/'
-			errorUrl = '/'
+			errorUrl = '/error'
 			transactionError = "/"
 			username = 'merchant_api1.bertazoli.com'
 			password = '1399164032'
@@ -128,7 +131,7 @@ environments {
 			returnUrl = '/donation/doExpressCheckout'
 			cancelUrl = '/'
 			successUrl = '/'
-			errorUrl = '/'
+			errorUrl = '/error'
 			transactionError = "/"
 			username = 'merchant_api1.bertazoli.com'
 			password = '1399164032'
@@ -143,7 +146,7 @@ environments {
 			returnUrl = '/donation/doExpressCheckout'
 			cancelUrl = '/'
 			successUrl = '/'
-			errorUrl = '/'
+			errorUrl = '/error'
 			transactionError = "/"
 			username = 'merchant_api1.bertazoli.com'
 			password = '1399164032'

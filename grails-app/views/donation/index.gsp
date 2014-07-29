@@ -33,10 +33,15 @@
 	</head>
 	<body>
 		<g:if test="${charity != null}">
-		     <h1><g:message code="donation.create.label" args="[charity?.name]" /></h1>
+		    <h1><g:message code="donation.create.label" args="[charity?.name]" /></h1>
+            <g:message code="charity.registrationNumber.label" default="Registration number" /> ${charity.registrationNumber}
 		</g:if>
+        <g:elseif test="${donationInstance != null && donationInstance.charity != null}">
+            <h1><g:message code="donation.create.label" args="[donationInstance.charity?.name]" /></h1>
+        </g:elseif>
 		<g:else>
-		     <g:textField name="charitySearch"/>
+            <g:message code="default.searchForACharity.label" default="Search for a charity" />
+		    <g:textField name="charitySearch"/>
 		</g:else>
 		
 		<a href="#list-donation" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -60,12 +65,12 @@
 			</g:hasErrors>
 			
 			<g:form url="[resource:donationInstance, action:'save']" >
-				<g:hiddenField name="charity.id" value="${charity != null ? charity.id : donationInstance?.charity}" />
+				<g:hiddenField name="charity.id" value="${charity != null ? charity.id : donationInstance != null ? donationInstance.charity?.id : null}" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					<g:submitButton name="create" class="save" value="${message(code: 'default.button.donate.label', default: 'Donate')}" />
 				</fieldset>
 			</g:form>
 		</div>

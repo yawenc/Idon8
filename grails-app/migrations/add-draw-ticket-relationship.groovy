@@ -1,26 +1,18 @@
 databaseChangeLog = {
 
-	changeSet(author: "vitor (generated)", id: "1405560268439-1") {
-		addColumn(tableName: "ticket") {
-			column(name: "draw_id", type: "bigint") {
-				constraints(nullable: "false", unique: "true")
-			}
+	changeSet(author: "vitor (generated)", id: "1405638960808-1") {
+		addColumn(tableName: "draw") {
+			column(name: "winner_id", type: "bigint")
 		}
 	}
 
-	changeSet(author: "vitor (generated)", id: "1405560268439-3") {
-		createIndex(indexName: "FKCBE86B0C7EADBE3D", tableName: "ticket") {
-			column(name: "draw_id")
+	changeSet(author: "vitor (generated)", id: "1405638960808-3") {
+		createIndex(indexName: "FK2F2D449FDE4E6A", tableName: "draw") {
+			column(name: "winner_id")
 		}
 	}
 
-	changeSet(author: "vitor (generated)", id: "1405560268439-4") {
-		createIndex(indexName: "draw_id_uniq_1405560268362", tableName: "ticket", unique: "true") {
-			column(name: "draw_id")
-		}
-	}
-
-	changeSet(author: "vitor (generated)", id: "1405560268439-2") {
-		addForeignKeyConstraint(baseColumnNames: "draw_id", baseTableName: "ticket", constraintName: "FKCBE86B0C7EADBE3D", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "draw", referencesUniqueColumn: "false")
+	changeSet(author: "vitor (generated)", id: "1405638960808-2") {
+		addForeignKeyConstraint(baseColumnNames: "winner_id", baseTableName: "draw", constraintName: "FK2F2D449FDE4E6A", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "ticket", referencesUniqueColumn: "false")
 	}
 }

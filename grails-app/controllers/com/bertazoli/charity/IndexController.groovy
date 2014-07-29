@@ -7,6 +7,7 @@ import com.bertazoli.charity.enums.DrawStatus;
 
 import grails.plugin.springsecurity.annotation.Secured;
 import grails.transaction.Transactional
+import urn.ebay.apis.eBLBaseComponents.PaymentStatusCodeType
 
 @Transactional(readOnly = true)
 @Secured('IS_AUTHENTICATED_ANONYMOUSLY')

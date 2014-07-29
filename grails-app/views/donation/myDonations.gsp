@@ -22,13 +22,18 @@
                 <g:message code="donation.date.label" default="Donation date" />
                 <g:formatDate date="${donation.donationDate}" formatName="donation.date.format" /><br/>
                 <g:message code="donation.amount.label" default="Donation amount" />
-                <g:formatNumber number="${donation.grossAmountValue}" type="number" formatName="default.currency.format" /><br/>
+                <g:formatNumber number="${donation.grossAmountValue}" formatName="default.currency.format" /><br/>
                 <g:message code="charity.name.label" default="Charity name" />
                 ${donation.charity.name}<br/>
+                <g:if test="${donation.tickets}">
                 <g:message code="donation.ticket.numbers.label" default="Ticket numbers" /><br/>
                 <g:each in="${donation.tickets}" var="ticket">
                     --> ${ticket.ticketNumber}<br/>
                 </g:each>
+                </g:if>
+                <g:else>
+                    <g:message code="donation.notCompleted.message" default="Donation not completed" /><br/>
+                </g:else>
                 <br/>
             </g:each>
         </div>

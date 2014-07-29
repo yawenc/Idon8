@@ -31,10 +31,12 @@ class DonationController {
         respond Donation.list(params), model:[charity: charity]
     }
 
+    @Secured(["ROLE_ADMIN"])
     def show(Donation donationInstance) {
         respond donationInstance
     }
 
+    @Secured(["ROLE_ADMIN"])
     def create() {
         respond new Donation(params)
     }
@@ -86,15 +88,17 @@ class DonationController {
 
     def myDonations() {
         def User user = User.findByUsername(springSecurityService.principal.username)
-        def myDonations = Donation.findAllByUserAndCompleted(user, true)
+        def myDonations = Donation.findAllByUser(user)
         ['myDonations': myDonations]
     }
 
+    @Secured(["ROLE_ADMIN"])
     def edit(Donation donationInstance) {
         respond donationInstance
     }
 
     @Transactional
+    @Secured(["ROLE_ADMIN"])
     def update(Donation donationInstance) {
         if (donationInstance == null) {
             notFound()
@@ -118,6 +122,7 @@ class DonationController {
     }
 
     @Transactional
+    @Secured(["ROLE_ADMIN"])
     def delete(Donation donationInstance) {
 
         if (donationInstance == null) {

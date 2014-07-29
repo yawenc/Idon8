@@ -15,6 +15,10 @@
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
+        <g:form action="activateCharities">
+            <g:select id="state" name="state.id" from="${com.bertazoli.charity.State.list()}" optionKey="id" required=""/>
+            <g:submitButton name="activate" class="activate" value="${message(code: 'default.button.activate.label', default: 'Activate')}" />
+        </g:form>
 		<div id="list-charity" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">

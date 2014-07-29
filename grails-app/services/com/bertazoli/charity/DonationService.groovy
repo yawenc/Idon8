@@ -3,6 +3,9 @@ package com.bertazoli.charity
 import urn.ebay.api.PayPalAPI.DoExpressCheckoutPaymentReq
 import urn.ebay.api.PayPalAPI.DoExpressCheckoutPaymentRequestType
 import urn.ebay.api.PayPalAPI.DoExpressCheckoutPaymentResponseType
+import urn.ebay.api.PayPalAPI.GetTransactionDetailsReq
+import urn.ebay.api.PayPalAPI.GetTransactionDetailsRequestType
+import urn.ebay.api.PayPalAPI.GetTransactionDetailsResponseType
 import urn.ebay.api.PayPalAPI.PayPalAPIInterfaceServiceService;
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutReq
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutRequestType
@@ -152,19 +155,33 @@ class DonationService {
 							Calendar c2 = cal.toGregorianCalendar();
 							donationInstance.setDonationDate(new Timestamp(c2.getTime().getTime()));
 							donationInstance.setTransaction(result.getTransactionID());
-							donationInstance.setFeeAmountCurrency(result.getFeeAmount().getCurrencyID());
-							donationInstance.setFeeAmountValue(Double.parseDouble(result.getFeeAmount().getValue()));
-							donationInstance.setGrossAmountCurrency(result.getGrossAmount().getCurrencyID());
-							donationInstance.setGrossAmountValue(Double.parseDouble(result.getGrossAmount().getValue()));
+
+                            if (result.feeAmount) {
+                                donationInstance.setFeeAmountCurrency(result.feeAmount.getCurrencyID());
+                                donationInstance.setFeeAmountValue(Double.parseDouble(result.feeAmount.getValue()));
+                            }
+
+                            if (result.grossAmount) {
+                                donationInstance.setGrossAmountCurrency(result.getGrossAmount().getCurrencyID());
+                                donationInstance.setGrossAmountValue(Double.parseDouble(result.getGrossAmount().getValue()));
+                            }
+
 							donationInstance.setPaymentStatusCode(result.getPaymentStatus());
 							donationInstance.setPaymentCode(result.getPaymentType());
-							donationInstance.setCompleted(true);
-							
-							createUserTickets(donationInstance);
+
+                            if (donationInstance.paymentStatusCode == PaymentStatusCodeType.COMPLETED) {
+                                donationInstance.setCompleted(true);
+                                createUserTickets(donationInstance);
+                            }
+
+                            donationInstance.clearErrors()
+                            donationInstance.validate()
 							
 							donationInstance.save flush:true
 
-                            emailTicketsToUser(donationInstance)
+                            if (donationInstance.tickets) {
+                                emailTicketsToUser(donationInstance)
+                            }
 						} catch (DatatypeConfigurationException e) {
 							e.printStackTrace();
 						}
@@ -272,6 +289,77 @@ class DonationService {
             to winner.donation.user.email
             subject "Your are the winner"
             html body
+        }
+    }
+
+    def checkPendingPayments() {
+        def donations = Donation.findAllByPaymentStatusCodeNotEqual(PaymentStatusCodeType.COMPLETED);
+
+        for (Donation donation : donations) {
+            if (!donation.transaction.equalsIgnoreCase("NOT COMPLETED")) {
+                PaymentTransactionType transaction = getPaymentTransaction(donation.transaction);
+                if (transaction && transaction.paymentInfo && transaction.paymentInfo.paymentStatus == PaymentStatusCodeType.COMPLETED) {
+                    def result = transaction.paymentInfo
+                    // payment has been completed, update database
+
+                    if (result.feeAmount) {
+                        donation.setFeeAmountCurrency(result.feeAmount.getCurrencyID());
+                        donation.setFeeAmountValue(Double.parseDouble(result.feeAmount.getValue()));
+                    }
+
+                    if (result.grossAmount) {
+                        donation.setGrossAmountCurrency(result.getGrossAmount().getCurrencyID());
+                        donation.setGrossAmountValue(Double.parseDouble(result.getGrossAmount().getValue()));
+                    }
+
+                    donation.setPaymentStatusCode(result.getPaymentStatus());
+                    donation.setPaymentCode(result.getPaymentType());
+
+                    if (donation.paymentStatusCode == PaymentStatusCodeType.COMPLETED) {
+                        donation.setCompleted(true);
+                        createUserTickets(donation);
+                    }
+
+                    donation.clearErrors()
+                    donation.validate()
+
+                    donation.save flush:true
+
+                    if (donation.tickets) {
+                        emailTicketsToUser(donation)
+                    }
+                }
+            }
+        }
+    }
+
+    def PaymentTransactionType getPaymentTransaction(String transaction) {
+        def getTransactionDetailsReq = new GetTransactionDetailsReq();
+        def getTransactionDetailsReqType = new GetTransactionDetailsRequestType();
+
+        getTransactionDetailsReqType.setTransactionID(transaction);
+        getTransactionDetailsReq.setGetTransactionDetailsRequest(getTransactionDetailsReqType);
+
+        PayPalAPIInterfaceServiceService service = null;
+        try {
+            service = new PayPalAPIInterfaceServiceService(getConfigurationMap());
+        } catch (IOException e) {
+            log.error("Failed to get configuration")
+        }
+        def getTransactionDetailsResponseType = null;
+        try {
+            getTransactionDetailsResponseType = service.getTransactionDetails(getTransactionDetailsReq);
+        } catch (Exception e) {
+            log.error("Something went bad: " + e.message)
+        }
+
+        if (getTransactionDetailsResponseType.ack.value.equalsIgnoreCase("SUCCESS")) {
+            return getTransactionDetailsResponseType.paymentTransactionDetails
+        } else {
+            getTransactionDetailsResponseType.errors.each {
+                log.error(it.longMessage);
+            }
+            return null;
         }
     }
 }

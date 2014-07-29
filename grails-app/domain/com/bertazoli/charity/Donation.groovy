@@ -22,7 +22,11 @@ class Donation {
 	static constraints = {
 		percentageToKeep blank: false, range: 0..30
 		grossAmountValue blank: false, validator: {
-			return (it >= 15 && it.remainder(new BigDecimal(5)) == 0)
+			if (it < 15) {
+                return 'donation.grossAmountValue.equalOrGreaterThanFifteen.error'
+            } else if (it.remainder(new BigDecimal(5)) != 0) {
+                return 'donation.grossAmountValue.multipleOfFive.error'
+            }
 		}
 	}
 	
