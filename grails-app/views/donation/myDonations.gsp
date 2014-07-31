@@ -25,7 +25,7 @@
                 <g:formatNumber number="${donation.grossAmountValue}" formatName="default.currency.format" /><br/>
                 <g:message code="charity.name.label" default="Charity name" />
                 ${donation.charity.name}<br/>
-                <g:if test="${donation.tickets}">
+                <g:if test="${donation.completed}">
                 <g:message code="donation.ticket.numbers.label" default="Ticket numbers" /><br/>
                 <g:each in="${donation.tickets}" var="ticket">
                     --> ${ticket.ticketNumber}<br/>
@@ -33,6 +33,11 @@
                 </g:if>
                 <g:else>
                     <g:message code="donation.notCompleted.message" default="Donation not completed" /><br/>
+                    <g:message code="donation.notCompleted.email1.message" default="Do you have questions about this donation?" />
+                    <g:link action="emailSupport" id="${donation.id}">
+                        <g:message code="donation.notCompleted.click.message" default="Click here to email us"/>
+                    </g:link>
+                    <g:message code="donation.notCompleted.email2.message" default=" and we'll check what happened" />
                 </g:else>
                 <br/>
             </g:each>

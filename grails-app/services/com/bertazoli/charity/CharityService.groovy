@@ -1,5 +1,6 @@
 package com.bertazoli.charity
 
+import com.bertazoli.charity.enums.CharityStatus
 import grails.transaction.Transactional
 
 @Transactional
@@ -22,7 +23,7 @@ class CharityService {
 	
 	def getNotSelectedCharities(Integer max) {
 		def selectedCharities;
-		selectedCharities = Charity.executeQuery("from Charity where id not in (SELECT charity from Donation where completed = true) and active = true order by rand()", [max: max ?: 10])
+		selectedCharities = Charity.executeQuery("from Charity where id not in (SELECT charity from Donation where completed = true) and active = true and status = ? order by rand()", [CharityStatus.REGISTERED], [max: max ?: 10])
 		return selectedCharities
 	}
 	
@@ -35,6 +36,9 @@ class CharityService {
 			and {
 				eq("active", true)
 			}
+            and {
+                eq("status", CharityStatus.REGISTERED)
+            }
             maxResults(20)
 		}
 		def clist = Charity.createCriteria().list(query)

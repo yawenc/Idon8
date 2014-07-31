@@ -104,6 +104,21 @@ class CharityController {
 		render charityService.autoCompleteList(params) as JSON
 	}
 
+    @Transactional
+    def activateCharities() {
+        def stateId = params.state.id
+        if (stateId) {
+            State state = State.get(stateId)
+
+            ArrayList<Charity> charities = Charity.executeQuery("select c from Charity c join c.address a where a.state = ? and c.status = ?", [state, CharityStatus.REGISTERED])
+            for (Charity charity : charities) {
+                charity.active = true
+                charity.save()
+            }
+        }
+        redirect action: "index", method: "GET"
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {
