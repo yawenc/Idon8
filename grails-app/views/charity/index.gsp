@@ -6,6 +6,31 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'charity.label', default: 'Charity')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
+        <script type="text/javascript">
+            $(document).ready( function() {
+                $("#charitySearch").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "${request.contextPath}/charity/autoCompleteList", // remote datasource
+                            data: request,
+                            success: function (data) {
+                                response(data); // set the response
+                            },
+                            error: function () { // handle server errors
+                                $.jGrowl("Unable to retrieve Charities", {
+                                    theme: 'ui-state-error ui-corner-all'
+                                });
+                            }
+                        });
+                    },
+                    minLength: 2, // triggered only after minimum 2 characters have been entered.
+                    select: function (event, ui) {
+                        $("#charityName").text(ui.item.id);
+                        window.location.replace('show/' + ui.item.id);
+                    }
+                });
+            });
+        </script>
 	</head>
 	<body>
 		<a href="#list-charity" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -19,6 +44,10 @@
             <g:select id="state" name="state.id" from="${com.bertazoli.charity.State.list()}" optionKey="id" required=""/>
             <g:submitButton name="activate" class="activate" value="${message(code: 'default.button.activate.label', default: 'Activate')}" />
         </g:form>
+        <div>
+            <g:message code="default.searchForACharity.label" default="Search for a charity" />
+            <g:textField name="charitySearch"/>
+        </div>
 		<div id="list-charity" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">

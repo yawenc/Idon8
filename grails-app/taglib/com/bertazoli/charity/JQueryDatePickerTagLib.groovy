@@ -13,8 +13,8 @@ class JQueryDatePickerTagLib {
 		def displayFormat = attrs.displayFormat
 		def datepickerFormat = attrs.datepickerFormat
 		
-		def displayFormatString = displayFormat ? displayFormat : "MM/dd/yyyy"
-		def datepickerFormatString = datepickerFormat ? datepickerFormat : "mm/dd/yy"		
+		def displayFormatString = displayFormat ? displayFormat : "dd/MM/yyyy"
+		def datepickerFormatString = datepickerFormat ? datepickerFormat : "dd/mm/yy"
 		//def dateString = value ? value.format('MM/dd/yyyy') : ""
 		def dateString = value ? value.format(displayFormatString) : ""
 		def dayString = value ? value.format('dd') : ""
@@ -31,10 +31,15 @@ class JQueryDatePickerTagLib {
 		out.println "<script type=\"text/javascript\"> \$(document).ready(function(){"
 		out.println "\$(\"#${name}\").datepicker({"
 		out.println "onClose: function(dateText, inst) {"
-		out.println "var selDate = \$.datepicker.parseDate('${datepickerFormatString}', dateText);"
+        out.println "var selDate = null"
+        out.println "try {"
+		out.println "selDate = \$.datepicker.parseDate('${datepickerFormatString}', dateText);"
+        out.println "} catch (err) {}"
+        out.println "if (selDate != null) {"
 		out.println "\$(\"#${name}_month\").attr(\"value\",selDate.getMonth() +1);"
 		out.println "\$(\"#${name}_day\").attr(\"value\",selDate.getDate());"
 		out.println "\$(\"#${name}_year\").attr(\"value\",selDate.getFullYear());"
+        out.println "}"
 		out.println "}"
 		
 		//If you want to customize using the jQuery UI events add an if block an attribute as follows

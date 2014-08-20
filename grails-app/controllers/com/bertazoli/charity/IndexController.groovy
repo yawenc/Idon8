@@ -13,9 +13,8 @@ import urn.ebay.apis.eBLBaseComponents.PaymentStatusCodeType
 @Secured('IS_AUTHENTICATED_ANONYMOUSLY')
 class IndexController {
 	def charityService
-	def searchableService
-	def grailsApplication
     def drawService
+    def messageSource
 
 	def index() {
 		def selectedCharities = charityService.getSelectedCharities()
@@ -25,22 +24,23 @@ class IndexController {
         if (total) {
             totalDonated = total.get(0)
         }
+
 		["selectedCharities": selectedCharities, "notSelectedCharities": notSelectedCharities, "totalDonated": totalDonated]
 	}
 
     def percentageToKeep() {
         def currentDraw = drawService.getCurrentDraw();
         def result = Donation.executeQuery("SELECT concat(percentageToKeep,'%'), count(*) FROM Donation where draw=? and completed=true group by percentageToKeep", currentDraw)
-        def response = ""
+        def response
         if (result) {
             response = result as JSON;
+        } else {
+            response = '[["0%"],[0]]'
         }
         render "[$response]"
     }
 
     def totalDonated() {
-        def currentDraw = drawService.getCurrentDraw()
-        def result = Donation.executeQuery("SELECT sum(grossAmountValue)*0.93 FROM Donation where draw=? and completed=true", currentDraw)
         render getTotalDonated() as JSON;
     }
 

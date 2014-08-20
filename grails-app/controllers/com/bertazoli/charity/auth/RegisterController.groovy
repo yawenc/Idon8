@@ -20,6 +20,13 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
 	
 	def register(RegisterCommand command) {
 
+        User userExist = User.findByEmail(command.email)
+        if (userExist) {
+            flash.error = message(code: 'user.register.userExists')
+            render view: 'index', model: [command: command]
+            return
+        }
+
 		if (command.hasErrors()) {
 			render view: 'index', model: [command: command]
 			return

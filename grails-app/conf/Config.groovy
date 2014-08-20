@@ -114,6 +114,7 @@ environments {
 		paypal {
 			url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='
 			returnUrl = '/donation/doExpressCheckout'
+            fundRaisingReturnUrl = '/donation/doFundRaisingExpressCheckout'
 			cancelUrl = '/'
 			successUrl = '/'
 			errorUrl = '/error'
@@ -129,6 +130,7 @@ environments {
 		paypal {
 			url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='
 			returnUrl = '/donation/doExpressCheckout'
+            fundRaisingReturnUrl = '/donation/doFundRaisingExpressCheckout'
 			cancelUrl = '/'
 			successUrl = '/'
 			errorUrl = '/error'
@@ -144,6 +146,7 @@ environments {
 		paypal {
 			url = 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='
 			returnUrl = '/donation/doExpressCheckout'
+            fundRaisingReturnUrl = '/donation/doFundRaisingExpressCheckout'
 			cancelUrl = '/'
 			successUrl = '/'
 			errorUrl = '/error'

@@ -10,7 +10,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: donationInstance, field: 'grossAmountValue', 'error')} required">
 	<label for="grossAmountValue">
-		<g:message code="donation.grossAmountValue.label" default="Gross Amount Value" />
+		<g:message code="donation.amount.label" default="Amount" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="grossAmountValue" type="text" value="${fieldValue(bean: donationInstance, field: 'grossAmountValue')}" required=""/>

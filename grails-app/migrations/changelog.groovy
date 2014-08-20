@@ -499,4 +499,13 @@ databaseChangeLog = {
 	include file: 'charity.groovy'
 
 	include file: 'add-draw-ticket-relationship.groovy'
+
+	include file: 'add-fund-raising-domain-classes.groovy'
+
+	include file: 'add-status-column-to-fundraising.groovy'
+
+
+	include file: 'add-image-to-fundraising.groovy'
+
+	include file: 'add-unique-constraint-email.groovy'
 }

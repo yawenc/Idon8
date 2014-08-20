@@ -15,8 +15,7 @@ class ManageDrawJob {
         // every first of the month we close the current draw and create a new one
         Draw currentDraw = drawService.getCurrentDraw();
 
-        // it's past time, we should be able to create a new Draw
-        drawService.createCurrentDraw()
+        drawService.createCurrentDraw(true)
 
         currentDraw.setStatus(DrawStatus.FINALIZED)
         currentDraw.setActive(false)

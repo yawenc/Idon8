@@ -1,6 +1,6 @@
 package com.bertazoli.charity
 
-
+import com.bertazoli.charity.util.DateUtil
 
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured;
@@ -66,18 +66,13 @@ class DrawController {
 			drawInstance.endDate = Date.parse('dd/MM/yyyy', params.endDate)
 		}
 
-		Calendar cal = Calendar.getInstance()
-		cal.setTime(drawInstance.endDate)
-		cal.set(Calendar.HOUR_OF_DAY, 23)
-		cal.set(Calendar.MINUTE, 59)
-		cal.set(Calendar.SECOND, 59)
-		cal.set(Calendar.MILLISECOND, 999)
-		drawInstance.endDate = cal.getTime();
+        drawInstance.endDate = DateUtil.toEndOfTheDay(drawInstance.endDate)
 	}
 	
-	def fixStartDate(params, drawInstance) {
+	def fixStartDate(params, Draw drawInstance) {
 		if (params.startDate) {
 			drawInstance.startDate = Date.parse('dd/MM/yyyy', params.startDate)
+            drawInstance.startDate = DateUtil.toBeginingOfTheDay(drawInstance.startDate)
 		}
 	}
 

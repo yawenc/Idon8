@@ -1,5 +1,7 @@
 package com.bertazoli.charity.auth
 
+import com.bertazoli.charity.FundRaising
+import com.bertazoli.charity.FundRaisingDonation
 import com.bertazoli.charity.user.UserDetails;
 import com.bertazoli.charity.Donation
 
@@ -16,13 +18,14 @@ class User {
 	boolean passwordExpired
 
 	static hasOne = [userDetails:UserDetails]
-	static hasMany = [donations:Donation]
+	static hasMany = [donations:Donation, fundRaising:FundRaising, fundRaisingDonation:FundRaisingDonation]
 	static transients = ['springSecurityService']
-
+    static fetchMode = [userDetails: 'eager']
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
-		email blank: false, nullable: false, email: true
+
+		email blank: false, nullable: false, email: true, unique: true
 		userDetails blank: true, nullable: true
 	}
 

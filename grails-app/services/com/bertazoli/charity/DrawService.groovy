@@ -8,13 +8,12 @@ import org.joda.time.DateTime
 class DrawService {
 
     def getCurrentDraw() {
-		def currentDate = new Date();
-		def currentDraw = Draw.findByStartDateLessThanEqualsAndEndDateGreaterThanEqualsAndStatusAndActive(currentDate, currentDate, DrawStatus.CURRENT, true)
+		def currentDraw = Draw.findByStatusAndActive(DrawStatus.CURRENT, true)
 		currentDraw
     }
 
-    def createCurrentDraw() {
-        if (!getCurrentDraw()) {
+    def createCurrentDraw(boolean force) {
+        if (force || !getCurrentDraw()) {
             Date today = new Date()
             Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Canada/Eastern"))
             cal.setTime(today)

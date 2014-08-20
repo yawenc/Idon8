@@ -7,6 +7,8 @@ import grails.plugin.springsecurity.SpringSecurityUtils
 
 @Secured(["ROLE_ADMIN"])
 class UserController extends grails.plugin.springsecurity.ui.UserController {
+    def springSecurityService
+    def saltSource
 
 	@Override
 	def update() {

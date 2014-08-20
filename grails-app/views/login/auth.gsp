@@ -1,58 +1,52 @@
+<!DOCTYPE html>
 <html>
-
 <head>
-<title><g:message code='spring.security.ui.login.title'/></title>
-<meta name='layout' content='register'/>
+    <meta name="layout" content="main"/>
+    <title>I-don8.org</title>
 </head>
-
 <body>
 
-<p/>
+<h1><g:message code='spring.security.ui.login.signin'/></h1>
+<form action='${postUrl}' method='POST' id="loginForm" name="loginForm" autocomplete='off'>
 
-<div class="login s2ui_center ui-corner-all" style='text-align:center;'>
-	<div class="login-inner">
-	<form action='${postUrl}' method='POST' id="loginForm" name="loginForm" autocomplete='off'>
-	<div class="sign-in">
+    <div class="fieldcontain">
+        <label for="username">
+            <g:message code='spring.security.ui.login.username'/>
+        </label>
+        <g:textField name="j_username" id="username" size="20" />
+    </div>
 
-	<h1><g:message code='spring.security.ui.login.signin'/></h1>
+    <div class="fieldcontain">
+        <label for="password">
+            <g:message code='spring.security.ui.login.password'/>
+        </label>
+        <g:passwordField name="j_password" id="password" size="20" />
+    </div>
 
-	<table>
-		<tr>
-			<td><label for="username"><g:message code='spring.security.ui.login.username'/></label></td>
-			<td><input name="j_username" id="username" size="20" /></td>
-		</tr>
-		<tr>
-			<td><label for="password"><g:message code='spring.security.ui.login.password'/></label></td>
-			<td><input type="password" name="j_password" id="password" size="20" /></td>
-		</tr>
-		<tr>
-			<td colspan='2'>
-				<input type="checkbox" class="checkbox" name="${rememberMeParameter}" id="remember_me" checked="checked" />
-				<label for='remember_me'><g:message code='spring.security.ui.login.rememberme'/></label> |
-				<span class="forgot-link">
-					<g:link controller='register' action='forgotPassword'><g:message code='spring.security.ui.login.forgotPassword'/></g:link>
-				</span>
-			</td>
-		</tr>
-		<tr>
-			<td colspan='2'>
-				<s2ui:linkButton elementId='register' controller='register' messageCode='spring.security.ui.login.register'/>
-				<s2ui:submitButton elementId='loginButton' form='loginForm' messageCode='spring.security.ui.login.login'/>
-			</td>
-		</tr>
-	</table>
+    <div class="fieldcontain">
+        <label for="remember_me">
+            <g:message code='spring.security.ui.login.rememberme'/>
+        </label>
+        <g:checkBox name="${rememberMeParameter}" id="remember_me" checked="true" />
+    </div>
 
-	</div>
-	</form>
-	</div>
-</div>
+    <div class="fieldcontain">
+        <g:link controller='register' action='forgotPassword'><g:message code='spring.security.ui.login.forgotPassword'/></g:link>
+    </div>
+
+    <div>
+        <g:link controller="register" action="index"><g:message code="spring.security.ui.login.register" /></g:link>
+    </div>
+
+    <div>
+        <g:submitButton name="login" value="${message(code: 'spring.security.ui.login.login')}" />
+    </div>
+</form>
 
 <script>
 $(document).ready(function() {
 	$('#username').focus();
 });
-
-<s2ui:initCheckboxes/>
 
 </script>
 

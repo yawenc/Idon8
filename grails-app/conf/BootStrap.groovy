@@ -18,7 +18,7 @@ class BootStrap {
     def drawService
 	
 	def init = { servletContext ->
-        drawService.createCurrentDraw()
+        drawService.createCurrentDraw(false)
 	}
 	def destroy = {
 	}

@@ -105,6 +105,29 @@
 				}
 			});
 
+            /*
+            $("#userFundRaisingSearch").autocomplete({
+                source : function(request, response) {
+                    $.ajax({
+                        url : "${request.contextPath}/fundRaising/autoCompleteList", // remote datasource
+                        data : request,
+                        success : function(data) {
+                            response(data); // set the response
+                        },
+                        error : function() { // handle server errors
+                            $.jGrowl("Unable to retrieve user's fund raising list", {
+                                theme : 'ui-state-error ui-corner-all'
+                            });
+                        }
+                    });
+                },
+                minLength : 2, // triggered only after minimum 2 characters have been entered.
+                select : function(event, ui) {
+                    window.location.replace('donation/userFundRaising/'+ui.item.id);
+                }
+            });
+            */
+
             var ajaxDataRenderer = function(url, plot, options) {
                 var ret = null;
                 $.ajax({
@@ -143,19 +166,45 @@
 	</head>
 	<body>
 		<sec:ifLoggedIn>
-			<g:message code="index.welcomeBack" args="${sec.username()}"/><br/>
-            <g:link controller="logout">Logout</g:link><br/>
-            <g:link controller="donation" action="myDonations"><g:message code="index.myDonations" default="My donations"/></g:link><br/>
-			<sec:ifAllGranted roles="ROLE_ADMIN">
-				<g:link controller="admin">Admin</g:link><br/>
+            <div><g:message code="index.welcomeBack" args="${sec.username()}"/></div>
+            <div><g:link controller="logout">Logout</g:link></div>
+            <div><g:link controller="mySpace"><g:message code="index.mySpace.label" default="My Space" /></g:link></div>
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <div><g:link controller="admin">Admin</g:link></div>
 			</sec:ifAllGranted>
 		</sec:ifLoggedIn>
 		<sec:ifNotLoggedIn>
-			<g:link controller="login">Login</g:link><br/>
-			<g:link controller="register">Register</g:link><br/>
+			<div><g:link controller="login">Login</g:link></div>
+            <div><g:link controller="register">Register</g:link></div>
 		</sec:ifNotLoggedIn>
-        <g:message code="index.listOfSelectedCharities.label" default="List of charities that have been selected" />
+
+        <div>
+            <h1><g:message code="index.howDoesItWork.label" default="How does it work" />?</h1>
+            <g:message code="index.howItWorks.message" />
+        </div>
+
+        <div>
+            <h1><g:message code="index.whyPaypal.label" default="Why paypal&#174;" />?</h1>
+            <g:message code="index.whyPaypal.message" />
+        </div>
+
+        <div>
+            <h1><g:message code="index.whatHappensToMyDonation.label" default="What happens to my donation" />?</h1>
+            <g:message code="index.whatHappensToMyDonation.message" />
+        </div>
+
+        <div>
+            <h1><g:message code="index.whereIsMyCharity.label" default="Where is my charity"  />?</h1>
+            <g:message code="index.whereIsMyCharity.message" />
+        </div>
+
+        <div>
+            <h1><g:message code="index.whatHappensIfTheCharityIChoseIsNoLongerActive.label" default="What happens if the charity I chose is no longer active" />?</h1>
+            <g:message code="index.whatHappensIfTheCharityIChoseIsNotActive.message" />
+        </div>
+
 		<div>
+            <h1><g:message code="index.listOfSelectedCharities.label" default="List of charities that have been selected" /></h1>
 			<g:each in="${selectedCharities}" status="i" var="charity">
 				<li class="controller">
 					<g:link url="donation/index/${charity.id}">${charity.name}</g:link>
@@ -163,9 +212,9 @@
 			</g:each>
 		</div>
 
-        <g:message code="index.listOfNeverSelectedCharities.label" default="List of charities that have never been selected" />
 		<div>
-			<g:each in="${notSelectedCharities}" status="i" var="charity">
+            <h1><g:message code="index.listOfNeverSelectedCharities.label" default="List of charities that have never been selected" /></h1>
+            <g:each in="${notSelectedCharities}" status="i" var="charity">
 				<li class="controller">
 					<g:link url="donation/index/${charity.id}">${charity.name}</g:link>
 				</li>
@@ -173,14 +222,14 @@
 		</div>
 
         <div>
-            <g:message code="index.donation.totalDonated" default="Total donated" />
-            <g:formatNumber number="${totalDonated}" type="number" formatName="default.currency.format" />
+            <h2><g:message code="index.donation.totalDonated" default="Total donated" /></h2>
+            <g:formatNumber number="${totalDonated}" formatName="default.currency.format" />
         </div>
 		<div id="page-body" role="main">
 			<g:link url="donation">Donate</g:link>
 			<div>
-            <g:message code="default.searchForACharity.label" default="Search for a charity" />
-            <g:textField name="charitySearch"/>
+                <g:message code="default.searchForACharity.label" default="Search for a charity" />
+                <g:textField name="charitySearch"/>
 			</div>
 		    <div>
 		    	<span id="charityName"></span>

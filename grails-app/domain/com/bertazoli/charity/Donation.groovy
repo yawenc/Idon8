@@ -29,7 +29,7 @@ class Donation {
             }
 		}
 	}
-	
+
 	static belongsTo = [user:User, draw:Draw, charity:Charity]
 	static hasMany = [tickets:Ticket]
 }
