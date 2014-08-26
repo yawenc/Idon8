@@ -508,4 +508,6 @@ databaseChangeLog = {
 	include file: 'add-image-to-fundraising.groovy'
 
 	include file: 'add-unique-constraint-email.groovy'
+
+	include file: 'add-fundraising-code.groovy'
 }

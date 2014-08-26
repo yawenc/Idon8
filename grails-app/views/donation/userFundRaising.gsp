@@ -17,7 +17,19 @@
 		<div id="list-donation" class="content scaffold-list" role="main">
 			<h1><g:message code="donation.make.label"/></h1>
             <h2>${fundRaising.user?.userDetails?.firstName} ${fundRaising.user?.userDetails?.lastName}</h2>
-            <h2>${fundRaising?.description}</h2>
+            <div>
+                <div class="inline-block">
+                    <g:if test="${fundRaising.fileName}">
+                        <span class="property-value">
+                            <img class="image" src="${createLink(controller: 'fundRaising', action: 'getImage', params: ['image': fundRaising.fileName])}" />
+                        </span>
+                    </g:if>
+                </div>
+                <div class="inline-block vertical-align-top">
+                    <span>${fundRaising?.description}</span>
+                </div>
+            </div>
+
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
