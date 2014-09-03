@@ -165,18 +165,10 @@
 		</script>
 	</head>
 	<body>
-		<sec:ifLoggedIn>
-            <div><g:message code="index.welcomeBack" args="${sec.username()}"/></div>
-            <div><g:link controller="logout">Logout</g:link></div>
-            <div><g:link controller="mySpace"><g:message code="index.mySpace.label" default="My Space" /></g:link></div>
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <div><g:link controller="admin">Admin</g:link></div>
-			</sec:ifAllGranted>
-		</sec:ifLoggedIn>
-		<sec:ifNotLoggedIn>
-			<div><g:link controller="login">Login</g:link></div>
-            <div><g:link controller="register">Register</g:link></div>
-		</sec:ifNotLoggedIn>
+
+        <div class="hero container">
+            Main Banner Image goes here
+        </div>
 
         <div>
             <h1><g:message code="index.howDoesItWork.label" default="How does it work" />?</h1>

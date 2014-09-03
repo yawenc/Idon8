@@ -26,11 +26,28 @@
 		<g:javascript library="application"/>
 	</head>
 	<body>
+        <div class="container sky">
+            <div class="row">
+                <div class="pull_right">
+                    <sec:ifLoggedIn>
+                        <div><g:message code="index.welcomeBack" args="${sec.username()}"/></div>
+                        <div><g:link controller="logout">Logout</g:link></div>
+                        <div><g:link controller="mySpace"><g:message code="index.mySpace.label" default="My Space" /></g:link></div>
+                        <sec:ifAllGranted roles="ROLE_ADMIN">
+                            <div><g:link controller="admin">Admin</g:link></div>
+                        </sec:ifAllGranted>
+                    </sec:ifLoggedIn>
+                    <sec:ifNotLoggedIn>
+                        <div><g:link controller="login">Login</g:link></div>
+                        <div><g:link controller="register">Register</g:link></div>
+                    </sec:ifNotLoggedIn>
+                </div>
+            </div>
+        </div>
 
 		<r:layoutResources />
 
         <div class="row">
-
 
             <div id="grailsLogo" role="banner">
                 <g:link controller="index">
@@ -38,6 +55,7 @@
                 </g:link>
             </div>
             <g:layoutBody/>
+            <div class="clearfix"/>
             <div class="footer" role="contentinfo"></div>
             <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 
@@ -67,6 +85,9 @@
                 }
             }
         </script>
+
+
+
         <!-- Vitor how do I add the links below? -->
         <script gumby-touch="js/libs" src="js/libs/gumby.js"></script>
         <script src="js/libs/ui/gumby.retina.js"></script>
