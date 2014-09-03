@@ -10,6 +10,9 @@ import urn.ebay.api.PayPalAPI.PayPalAPIInterfaceServiceService;
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutReq
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutRequestType
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutResponseType
+import urn.ebay.api.PayPalAPI.TransactionSearchReq
+import urn.ebay.api.PayPalAPI.TransactionSearchRequestType
+import urn.ebay.api.PayPalAPI.TransactionSearchResponseType
 import urn.ebay.apis.CoreComponentTypes.BasicAmountType
 import urn.ebay.apis.eBLBaseComponents.PaymentDetailsItemType
 import urn.ebay.apis.eBLBaseComponents.PaymentDetailsType
@@ -27,8 +30,10 @@ import urn.ebay.apis.eBLBaseComponents.*
 
 import com.bertazoli.charity.Donation
 
+import java.text.DateFormat
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 
 @Transactional
 class DonationService {
@@ -531,5 +536,27 @@ class DonationService {
             }
         }
         return grailsLinkGenerator.serverBaseURL + grailsApplication.config.paypal.errorUrl
+    }
+
+    def List<PaymentTransactionSearchResultType> transactionSearch(Date date) {
+        String dateString = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(date)
+        TransactionSearchReq searchReq = new TransactionSearchReq();
+        TransactionSearchRequestType requestType = new TransactionSearchRequestType()
+
+        requestType.setStartDate(dateString)
+
+        searchReq.setTransactionSearchRequest(requestType)
+        Map<String, String> configurationMap = getConfigurationMap();
+        PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap)
+
+        try {
+            TransactionSearchResponseType responseType = service.transactionSearch(searchReq);
+            if (responseType != null && responseType.ack == AckCodeType.SUCCESS) {
+                return responseType.paymentTransactions
+            }
+        } catch (Exception e) {
+
+        }
+        return null
     }
 }

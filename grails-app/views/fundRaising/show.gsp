@@ -51,10 +51,12 @@
 				</li>
 				</g:if>
 
-                <g:if test="${fundRaisingInstance?.image}">
+                <g:if test="${fundRaisingInstance?.fileName}">
                 <li class="fieldcontain">
                     <span id="image-label" class="property-label"><g:message code="fundRaising.image.label" default="Image" /></span>
-                    <img src="data:image/png;base64,${fundRaisingInstance.image}" />
+                    <span class="property-value">
+                        <img class="image" src="${createLink(controller: 'fundRaising', action: 'getImage', params: ['image': fundRaisingInstance.fileName])}" />
+                    </span>
                 </li>
                 </g:if>
 			</ol>

@@ -105,29 +105,6 @@
 				}
 			});
 
-            /*
-            $("#userFundRaisingSearch").autocomplete({
-                source : function(request, response) {
-                    $.ajax({
-                        url : "${request.contextPath}/fundRaising/autoCompleteList", // remote datasource
-                        data : request,
-                        success : function(data) {
-                            response(data); // set the response
-                        },
-                        error : function() { // handle server errors
-                            $.jGrowl("Unable to retrieve user's fund raising list", {
-                                theme : 'ui-state-error ui-corner-all'
-                            });
-                        }
-                    });
-                },
-                minLength : 2, // triggered only after minimum 2 characters have been entered.
-                select : function(event, ui) {
-                    window.location.replace('donation/userFundRaising/'+ui.item.id);
-                }
-            });
-            */
-
             var ajaxDataRenderer = function(url, plot, options) {
                 var ret = null;
                 $.ajax({

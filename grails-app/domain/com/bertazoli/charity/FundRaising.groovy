@@ -13,11 +13,12 @@ class FundRaising {
     Boolean active
     FundRaisingStatus status
     String fileName
+    Boolean privateFundRaising
+    String code
 
     BigDecimal totalDonated
-    byte[] image
 
-    static transients = ['totalDonated', 'image']
+    static transients = ['totalDonated']
 
     static constraints = {
         startDate blank: false, validator: { value, obj ->
@@ -42,6 +43,7 @@ class FundRaising {
         }
 
         fileName blank: true, nullable: true
+        code blank: true, nullable: true
     }
 
     static belongsTo = [user:User]

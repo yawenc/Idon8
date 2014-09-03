@@ -92,6 +92,14 @@ img {
 .content {
 }
 
+.inline-block {
+    display: inline-block;
+}
+
+.vertical-align-top {
+    vertical-align: top;
+}
+
 .content h1 {
 	border-bottom: 1px solid #CCCCCC;
 	margin: 0.8em 1em 0.3em;
@@ -232,6 +240,11 @@ fieldset,
 .fieldcontain .property-value {
 	display: block;
 	margin-left: 27%;
+}
+
+.property-value .image {
+    resize: both;
+    width: 300px;
 }
 
 label {

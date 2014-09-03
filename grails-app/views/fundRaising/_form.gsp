@@ -24,10 +24,18 @@
     <g:jqDatePicker name="endDate" value="${fundRaisingInstance?.endDate}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: fundRaisingInstance, field: 'privateFundRaising', 'error')} required">
+    <label for="privateFundRaising">
+        <g:message code="fundRaising.private.label" default="Private" />
+        <span class="required-indicator">*</span>
+    </label>
+    <g:checkBox name="privateFundRaising" value="${fundRaisingInstance?.privateFundRaising}" />
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: fundRaisingInstance, field: 'image', 'error')} required">
     <label for="image">
         <g:message code="fundRaising.image.label" default="Image" />
         <span class="required-indicator">*</span>
     </label>
-    <input type="file" name="image"/>
+    <input type="file" name="image" id="image"/>
 </div>

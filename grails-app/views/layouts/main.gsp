@@ -20,8 +20,27 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'gumby.css')}" type="text/css">
-		<!-- Vitor how do I add the link below? -->
-		<script src="js/libs/modernizr-2.6.2.min.js"></script>
+		<script src="${resource(dir: 'js/libs', file: 'modernizr-2.6.2.min.js')}" type="text/javascript"></script>
+
+        <script gumby-touch="js/libs" src="${resource(dir: 'js/libs', file: 'gumby.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js/libs/ui', file: 'gumby.retina.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js/libs/ui', file: 'gumby.fixed.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js/libs/ui', file: 'gumby.skiplink.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js/libs/ui', file: 'gumby.toggleswitch.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js/libs/ui', file: 'gumby.checkbox.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js/libs/ui', file: 'gumby.radiobtn.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js/libs/ui', file: 'gumby.tabs.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js/libs/ui', file: 'gumby.navbar.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js/libs/ui', file: 'jquery.validation.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js/libs', file: 'gumby.init.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js', file: 'plugins.js')}" type="text/javascript"></script>
+        <script src="${resource(dir: 'js', file: 'main.js')}" type="text/javascript"></script>
+
+        <!--[if lt IE 7 ]>
+        <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+        <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+
 		<g:layoutHead/>
 		<g:javascript library="application"/>
 	</head>
@@ -58,55 +77,6 @@
             <div class="clearfix"/>
             <div class="footer" role="contentinfo"></div>
             <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
-
-
         </div>
-
-
-
-        <!-- Grab Google CDN's jQuery, fall back to local if offline -->
-        <!-- 2.0 for modern browsers, 1.10 for .oldie -->
-        <script>
-            var oldieCheck = Boolean(document.getElementsByTagName('html')[0].className.match(/\soldie\s/g));
-            if(!oldieCheck) {
-                document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><\/script>');
-            } else {
-                document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"><\/script>');
-            }
-        </script>
-        <script>
-            if(!window.jQuery) {
-                if(!oldieCheck) {
-                    <!-- Vitor how do I add the link below? -->
-                    document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-                } else {
-                    <!-- Vitor how do I add the link below? -->
-                    document.write('<script src="js/libs/jquery-1.10.1.min.js"><\/script>');
-                }
-            }
-        </script>
-
-
-
-        <!-- Vitor how do I add the links below? -->
-        <script gumby-touch="js/libs" src="js/libs/gumby.js"></script>
-        <script src="js/libs/ui/gumby.retina.js"></script>
-        <script src="js/libs/ui/gumby.fixed.js"></script>
-        <script src="js/libs/ui/gumby.skiplink.js"></script>
-        <script src="js/libs/ui/gumby.toggleswitch.js"></script>
-        <script src="js/libs/ui/gumby.checkbox.js"></script>
-        <script src="js/libs/ui/gumby.radiobtn.js"></script>
-        <script src="js/libs/ui/gumby.tabs.js"></script>
-        <script src="js/libs/ui/gumby.navbar.js"></script>
-        <script src="js/libs/ui/jquery.validation.js"></script>
-        <script src="js/libs/gumby.init.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-
-        <!--[if lt IE 7 ]>
-        <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-        <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-        <![endif]-->
-
 	</body>
 </html>

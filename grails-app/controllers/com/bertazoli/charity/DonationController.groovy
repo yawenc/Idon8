@@ -1,8 +1,10 @@
 package com.bertazoli.charity
 
 import com.bertazoli.charity.enums.DrawStatus
+import com.bertazoli.charity.util.DateUtil
 import grails.converters.JSON
 import org.joda.time.DateTime
+import urn.ebay.apis.eBLBaseComponents.PaymentTransactionSearchResultType
 
 import java.text.NumberFormat
 
@@ -38,6 +40,23 @@ class DonationController {
     @Secured(["ROLE_ADMIN"])
     def show(Donation donationInstance) {
         respond donationInstance
+    }
+
+    @Secured(["ROLE_ADMIN"])
+    def transactionSearch() {
+        println(params)
+        def date = new Date()
+        if (params.transactionStartDate) {
+            Calendar c = Calendar.getInstance()
+            c.set(Integer.parseInt(params.transactionStartDate_year), Integer.parseInt(params.transactionStartDate_month)-1, Integer.parseInt(params.transactionStartDate_day))
+            date = c.getTime()
+        }
+
+        date = DateUtil.toBeginingOfTheDay(date)
+
+        List<PaymentTransactionSearchResultType> transactionList = donationService.transactionSearch(date)
+
+        ["transactionList":transactionList]
     }
 
     @Secured(["ROLE_ADMIN"])

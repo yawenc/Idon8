@@ -4,16 +4,21 @@ import com.bertazoli.charity.auth.User
 import com.bertazoli.charity.enums.FundRaisingStatus
 import com.bertazoli.charity.util.DateUtil
 import grails.plugin.springsecurity.annotation.Secured
+import liquibase.util.MD5Util
+import org.springframework.web.multipart.MultipartFile
 import urn.ebay.apis.eBLBaseComponents.PaymentStatusCodeType
+
+import java.nio.file.Files
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 @Secured(["ROLE_USER"])
 class FundRaisingController {
-    def fundRaisingService
+    def fileUploadService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
     def springSecurityService
 
     def index(Integer max) {
@@ -54,12 +59,8 @@ class FundRaisingController {
             return
         }
 
-        User user = User.findByUsername(springSecurityService.principal.username)
-        fundRaisingInstance.user = user
-        fundRaisingInstance.active = true
-        fundRaisingInstance.status = FundRaisingStatus.CURRENT
-        fundRaisingInstance.startDate = DateUtil.toBeginingOfTheDay(fundRaisingInstance.startDate)
-        fundRaisingInstance.endDate = DateUtil.toEndOfTheDay(fundRaisingInstance.endDate)
+        setDefaultValues(fundRaisingInstance)
+
         fundRaisingInstance.clearErrors()
         fundRaisingInstance.validate()
 
@@ -84,28 +85,63 @@ class FundRaisingController {
         respond fundRaisingInstance
     }
 
-    @Transactional
-    @Secured(["ROLE_ADMIN"])
-    def update(FundRaising fundRaisingInstance) {
-        def f = request.getFile('image')
-        if (f.empty) {
-            flash.message = 'file cannot be empty'
-            render (view: 'edit')
-            return
-        }
-
-        f.transferTo(new File('/tmp/upload.jpg'))
-
-        if (fundRaisingInstance == null) {
-            notFound()
-            return
-        }
-
+    def setDefaultValues(FundRaising fundRaisingInstance) {
         User user = User.findByUsername(springSecurityService.principal.username)
         fundRaisingInstance.user = user
         fundRaisingInstance.active = true
-        fundRaisingInstance.startDate = DateUtil.toBeginingOfTheDay(fundRaisingInstance.startDate)
-        fundRaisingInstance.endDate = DateUtil.toEndOfTheDay(fundRaisingInstance.endDate)
+        fundRaisingInstance.status = FundRaisingStatus.CURRENT
+
+        if (fundRaisingInstance.startDate) {
+            fundRaisingInstance.startDate = DateUtil.toBeginingOfTheDay(fundRaisingInstance.startDate)
+        }
+        if (fundRaisingInstance.endDate) {
+            fundRaisingInstance.endDate = DateUtil.toEndOfTheDay(fundRaisingInstance.endDate)
+        }
+
+        if (params.image) {
+            MultipartFile file = params.image;
+            if (!file.isEmpty()) {
+                def validContents = ['image/png', 'image/jpeg', 'image/gif']
+                if (!validContents.contains(file.getContentType())) {
+                    fundRaisingInstance.clearErrors()
+                    fundRaisingInstance.validate()
+                    flash.message = message(code: 'fundRaising.invalidImageType.message')
+                    render(view: 'create', model: [fundRaisingInstance:fundRaisingInstance])
+                    return
+                }
+                fundRaisingInstance.fileName = fileUploadService.saveFile(file)
+            }
+        }
+    }
+
+    def getImage() {
+        File image = fileUploadService.getImage(params.image)
+        if (image) {
+            response.contentType = Files.probeContentType(image.toPath())
+            OutputStream out = response.outputStream
+
+            byte[] buf = new byte[8192];
+            InputStream is = new FileInputStream(image)
+            int c=0
+
+            while ((c=is.read(buf, 0, buf.length)) > 0) {
+                out.write(buf, 0, c)
+                out.flush()
+            }
+
+            out.close()
+            is.close()
+        } else {
+            response.sendError(404)
+        }
+    }
+
+    @Transactional
+    @Secured(["ROLE_ADMIN"])
+    def update(FundRaising fundRaisingInstance) {
+
+        setDefaultValues(fundRaisingInstance)
+
         fundRaisingInstance.clearErrors()
         fundRaisingInstance.validate()
 
