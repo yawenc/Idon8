@@ -70,7 +70,7 @@
 
             <div id="grailsLogo" role="banner">
                 <g:link controller="index">
-                    <img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="I-don8.org"/>
+                    <img src="${resource(dir: 'images', file: 'logo.png')}" alt="I-don8.org"/>
                 </g:link>
             </div>
             <g:layoutBody/>
