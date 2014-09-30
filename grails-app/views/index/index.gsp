@@ -147,6 +147,11 @@
             Main Banner Image goes here
         </div>
 
+    <div>
+        <g:message code="default.searchForACharity.label" default="Search for a charity" />
+        <g:textField name="charitySearch"/>
+    </div>
+
         <div>
             <h1><g:message code="index.howDoesItWork.label" default="How does it work" />?</h1>
             <g:message code="index.howItWorks.message" />
@@ -196,14 +201,11 @@
         </div>
 		<div id="page-body" role="main">
 			<g:link url="donation">Donate</g:link>
-			<div>
-                <g:message code="default.searchForACharity.label" default="Search for a charity" />
-                <g:textField name="charitySearch"/>
-			</div>
 		    <div>
 		    	<span id="charityName"></span>
 		    </div>
 		</div>
+        <div class="clearfix"/>
         <div id="chart2" style="margin-top:20px; margin-left:20px; width:200px; height:200px;"></div>
 	</body>
 </html>

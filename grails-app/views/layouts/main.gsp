@@ -47,6 +47,11 @@
 	<body>
         <div class="container sky">
             <div class="row">
+                <div class="pull_left">
+                    <g:link controller="index">
+                        <img src="${resource(dir: 'images', file: 'logo.png')}" alt="I-don8.org"/>
+                    </g:link>
+                </div>
                 <div class="pull_right">
                     <sec:ifLoggedIn>
                         <div><g:message code="index.welcomeBack" args="${sec.username()}"/></div>
@@ -57,8 +62,7 @@
                         </sec:ifAllGranted>
                     </sec:ifLoggedIn>
                     <sec:ifNotLoggedIn>
-                        <div><g:link controller="login">Login</g:link></div>
-                        <div><g:link controller="register">Register</g:link></div>
+                        <div class="small"><g:link controller="login">Login</g:link> | <g:link controller="register">Register</g:link></div>
                     </sec:ifNotLoggedIn>
                 </div>
             </div>
@@ -67,14 +71,7 @@
 		<r:layoutResources />
 
         <div class="row">
-
-            <div id="grailsLogo" role="banner">
-                <g:link controller="index">
-                    <img src="${resource(dir: 'images', file: 'logo.png')}" alt="I-don8.org"/>
-                </g:link>
-            </div>
             <g:layoutBody/>
-            <div class="clearfix"/>
             <div class="footer" role="contentinfo"></div>
             <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
         </div>
