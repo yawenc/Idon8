@@ -16,7 +16,7 @@
           <root url="file://$MODULE_DIR$/target/work/plugins/jquery-ui-1.10.3/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/famfamfam-1.0.1/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/joda-time-1.5/grails-app/views" relative="/" />
-          <root url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/web-app" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.0.2/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -28,6 +28,9 @@
         </datasource-map>
         <naming-strategy-map />
       </configuration>
+    </facet>
+    <facet type="gwt" name="GWT">
+      <configuration />
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
@@ -60,10 +63,10 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/joda-time-1.5/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/joda-time-1.5/grails-app/taglib" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1">
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/grails-app/taglib" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.0.2">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.0.2/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.0.2/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.0.2/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/jquery-ui-1.10.3">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-ui-1.10.3/grails-app/taglib" isTestSource="false" />
@@ -74,10 +77,10 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/mail-1.0.5/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/mail-1.0.5/grails-app/taglib" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/target/work/plugins/quartz-1.0.1">
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/quartz-1.0.1/src/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/quartz-1.0.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/quartz-1.0.1/grails-app/services" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/target/work/plugins/quartz-1.0.2">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/quartz-1.0.2/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/quartz-1.0.2/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/quartz-1.0.2/grails-app/services" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/resources-1.2.7">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/resources-1.2.7/src/java" isTestSource="false" />
@@ -126,7 +129,6 @@
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.3/joda-time-2.3.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-spellchecker/2.4.1/lucene-spellchecker-2.4.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-snowball/2.4.1/lucene-snowball-2.4.1.jar!/" />

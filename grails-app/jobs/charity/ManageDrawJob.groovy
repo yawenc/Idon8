@@ -8,11 +8,12 @@ class ManageDrawJob {
     def donationService
 
     static triggers = {
-      cron name: 'drawTrigger', cronExpression: "0 0 0 1 * ?"
+        cron name: 'drawTrigger', cronExpression: "0 0 0 1 * ?"
     }
 
     def execute() {
         // every first of the month we close the current draw and create a new one
+        println("Running draw job")
         Draw currentDraw = drawService.getCurrentDraw();
 
         drawService.createCurrentDraw(true)

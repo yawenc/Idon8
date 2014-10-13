@@ -12,6 +12,7 @@
       <configuration>
         <datasource-map>
           <unit-entry name="Gorm" />
+          <unit-entry name="target-eclipse:classes:hibernate.cfg.xml" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/target-eclipse/classes/hibernate.cfg.xml" />
@@ -73,7 +74,6 @@
           <root url="file://$MODULE_DIR$/lib" />
           <root url="jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.3/joda-time-2.3.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-spellchecker/2.4.1/lucene-spellchecker-2.4.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-snowball/2.4.1/lucene-snowball-2.4.1.jar!/" />

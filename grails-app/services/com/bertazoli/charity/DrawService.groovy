@@ -13,6 +13,7 @@ class DrawService {
     }
 
     def createCurrentDraw(boolean force) {
+        println(new Date())
         if (force || !getCurrentDraw()) {
             Date today = new Date()
             Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Canada/Eastern"))
