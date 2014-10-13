@@ -143,14 +143,23 @@
 	</head>
 	<body>
 
-        <div class="hero container">
-            Main Banner Image goes here
+        <div class="hero">
+            <div class="row">
+                <h1>Donate and win heading</h1>
+                <h4>Descriptive subheading text lorem ipsum lorem ipsum lorem ipsum</h4>
+            </div>
         </div>
 
-    <div>
-        <g:message code="default.searchForACharity.label" default="Search for a charity" />
-        <g:textField name="charitySearch"/>
-    </div>
+        <div class="search-bar-wrapper">
+            <div class="row">
+                <g:message code="default.searchForACharity.label" default="Search for a charity" />
+                <g:textField name="charitySearch"/>
+            </div>
+        </div>
+
+    <div class="row">
+
+
 
         <div>
             <h1><g:message code="index.howDoesItWork.label" default="How does it work" />?</h1>
@@ -177,35 +186,36 @@
             <g:message code="index.whatHappensIfTheCharityIChoseIsNotActive.message" />
         </div>
 
-		<div>
+        <div>
             <h1><g:message code="index.listOfSelectedCharities.label" default="List of charities that have been selected" /></h1>
-			<g:each in="${selectedCharities}" status="i" var="charity">
-				<li class="controller">
-					<g:link url="donation/index/${charity.id}">${charity.name}</g:link>
-				</li>
-			</g:each>
-		</div>
+            <g:each in="${selectedCharities}" status="i" var="charity">
+                <li class="controller">
+                    <g:link url="donation/index/${charity.id}">${charity.name}</g:link>
+                </li>
+            </g:each>
+        </div>
 
-		<div>
+        <div>
             <h1><g:message code="index.listOfNeverSelectedCharities.label" default="List of charities that have never been selected" /></h1>
             <g:each in="${notSelectedCharities}" status="i" var="charity">
-				<li class="controller">
-					<g:link url="donation/index/${charity.id}">${charity.name}</g:link>
-				</li>
-			</g:each>
-		</div>
+                <li class="controller">
+                    <g:link url="donation/index/${charity.id}">${charity.name}</g:link>
+                </li>
+            </g:each>
+        </div>
 
         <div>
             <h2><g:message code="index.donation.totalDonated" default="Total donated" /></h2>
             <g:formatNumber number="${totalDonated}" formatName="default.currency.format" />
         </div>
-		<div id="page-body" role="main">
-			<g:link url="donation">Donate</g:link>
-		    <div>
-		    	<span id="charityName"></span>
-		    </div>
-		</div>
+        <div id="page-body" role="main">
+            <g:link url="donation">Donate</g:link>
+            <div>
+                <span id="charityName"></span>
+            </div>
+        </div>
         <div class="clearfix"/>
         <div id="chart2" style="margin-top:20px; margin-left:20px; width:200px; height:200px;"></div>
+    </div>
 	</body>
 </html>
