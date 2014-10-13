@@ -4,19 +4,19 @@
     <facet type="web" name="GrailsWeb">
       <configuration>
         <webroots>
-          <root url="file://$MODULE_DIR$/target/work/plugins/database-migration-1.4.0/grails-app/views" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/spring-security-ui-1.0-RC2/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/spring-security-ui-1.0-RC2/grails-app/views" relative="/" />
-          <root url="file://$MODULE_DIR$/target/work/plugins/calendar-1.2.1/web-app" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/database-migration-1.4.0/grails-app/views" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-2.0-RC3/grails-app/views" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.0.2/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/csv-0.3.1/web-app" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/calendar-1.2.1/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/mail-1.0.5/grails-app/views" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/resources-1.2.7/web-app" relative="/" />
-          <root url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-2.0-RC3/grails-app/views" relative="/" />
-          <root url="file://$MODULE_DIR$/target/work/plugins/searchable-0.6.8/grails-app/views" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/joda-time-1.5/grails-app/views" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/jquery-ui-1.10.3/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/famfamfam-1.0.1/web-app" relative="/" />
-          <root url="file://$MODULE_DIR$/target/work/plugins/joda-time-1.5/grails-app/views" relative="/" />
-          <root url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/web-app" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/searchable-0.6.8/grails-app/views" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -60,10 +60,10 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/joda-time-1.5/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/joda-time-1.5/grails-app/taglib" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1">
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/grails-app/taglib" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.0.2">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.0.2/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.0.2/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.0.2/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/jquery-ui-1.10.3">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-ui-1.10.3/grails-app/taglib" isTestSource="false" />
@@ -119,7 +119,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="sass-stdlib" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="grails-2.3.8" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="grails-2.3.8" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="grails-2.3.8" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library (Idon8-grailsPlugins)">
